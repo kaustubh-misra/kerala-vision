@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kerala Vision ToC & MindMap</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      margin: 0; padding: 0;
+      background-color: #0b0f19;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      overflow: auto;
+      user-select: none;
+    }
+
+    /* Native Text Selection for Editors */
+    [contenteditable="true"] {
+      user-select: text !important;
+      -webkit-user-select: text !important;
+      cursor: text;
+    }
+
+    /* Floating Toolbar */
+    #toolbar {
+      position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+      background: #1e293b; border: 1px solid #334155;
+      padding: 6px 14px; border-radius: 20px;
+      display: flex; gap: 8px; align-items: center;
+      z-index: 1000; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .tb-divider { width: 1px; height: 18px; background: #475569; margin: 0 2px; }
+    .tb-btn {
+      background: #334155; color: #cbd5e1; border: none; padding: 6px 12px;
+      border-radius: 8px; font-weight: 600; font-size: 0.8rem; cursor: pointer;
+      display: flex; align-items: center; gap: 6px; transition: 0.2s;
+    }
+    .tb-btn:hover { background: #475569; color: #fff; }
+    .tb-btn.success { background: #16a34a; color: #fff; }
+    .tb-btn.success:hover { background: #15803d; }
+    .tb-btn.danger { background: #dc2626; color: #fff; }
+    .tb-btn.danger:hover { background: #b91c1c; }
+
+    #canvas-container {
+      position: relative; width: 2800px; height: 1800px; padding: 60px; margin-top: 40px;
+    }
+
+    /* SVG Canvas Overlay */
+    svg {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 1;
+    }
+
+    /* Card Elements */
+    .node-wrapper {
+      position: absolute; width: 240px; z-index: 10;
+    }
+    .node-wrapper.selected-wrapper .node {
+      border-color: #ef4444 !important; box-shadow: 0 0 0 3px rgba(239,68,68,0.4);
+    }
+
+    .node {
+      position: relative; width: 100%; padding: 12px 14px;
+      border-radius: 12px; background: #ffffff; border: 2px solid #e2e8f0;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+      display: flex; align-items: flex-start; gap: 10px;
+      cursor: grab; transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .node:active { cursor: grabbing; }
+    .node:hover { box-shadow: 0 16px 30px -5px rgba(0, 0, 0, 0.5); border-color: #38bdf8; }
+
+    .icon-box {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 1.1rem; cursor: pointer;
+    }
+    .node-content { display: flex; flex-direction: column; gap: 3px; width: 100%; }
+
+    /* Inline Editors */
+    .title, .subtitle {
+      outline: none; border: 1px solid transparent; border-radius: 4px; padding: 1px 4px; margin-left: -4px;
+    }
+    .title { font-weight: 700; font-size: 0.85rem; line-height: 1.25; }
+    .subtitle { font-size: 0.72rem; line-height: 1.3; font-weight: 500; }
+    
+    /* Edit Mode Styling */
+    [contenteditable="true"] {
+      background: #ffffff !important; color: #0f172a !important;
+      border-color: #38bdf8 !important; box-shadow: 0 0 0 2px rgba(56,189,248,0.4) !important;
+      z-index: 50; position: relative;
+    }
+
+    .url-badge {
+      position: absolute; top: 6px; right: 8px; font-size: 0.7rem; color: #38bdf8;
+      cursor: pointer; opacity: 0.7; transition: opacity 0.2s; text-decoration: none;
+    }
+    .url-badge:hover { opacity: 1; transform: scale(1.15); }
+
+    /* Color Themes */
+    .node.emerald { background: #f0fdf4; border-color: #86efac; }
+    .node.emerald .icon-box { background: #dcfce7; color: #166534; }
+    .node.emerald .title { color: #14532d; }
+    .node.emerald .subtitle { color: #15803d; }
+
+    .node.indigo { background: #faf5ff; border-color: #d8b4fe; }
+    .node.indigo .icon-box { background: #f3e8ff; color: #7e22ce; }
+    .node.indigo .title { color: #581c87; }
+    .node.indigo .subtitle { color: #7e22ce; }
+
+    .node.slate { background: #f8fafc; border-color: #cbd5e1; }
+    .node.slate .icon-box { background: #e2e8f0; color: #475569; }
+    .node.slate .title { color: #1e293b; }
+    .node.slate .subtitle { color: #64748b; }
+
+    .node.amber { background: #fffbeb; border-color: #fde047; }
+    .node.amber .icon-box { background: #fef3c7; color: #b45309; }
+    .node.amber .title { color: #78350f; }
+    .node.amber .subtitle { color: #b45309; }
+
+    .node.rose { background: #f0f9ff; border-color: #93c5fd; }
+    .node.rose .icon-box { background: #dbeafe; color: #1d4ed8; }
+    .node.rose .title { color: #1e3a8a; }
+    .node.rose .subtitle { color: #2563eb; }
+
+    .node.cyan { background: #ecfeff; border-color: #67e8f9; }
+    .node.cyan .icon-box { background: #cffafe; color: #0891b2; }
+    .node.cyan .title { color: #164e63; }
+    .node.cyan .subtitle { color: #0e7490; }
+
+    /* Point & Drag Anchor Dots */
+    .anchor-pt {
+      position: absolute; width: 14px; height: 14px;
+      background: #0ea5e9; border: 2px solid #ffffff;
+      border-radius: 50%; z-index: 30; opacity: 0;
+      cursor: crosshair; box-shadow: 0 0 8px rgba(56,189,248,0.8);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .node-wrapper:hover .anchor-pt, .anchor-pt.show-all { opacity: 0.9; }
+    .anchor-pt:hover { transform: scale(1.6); background: #22c55e !important; opacity: 1 !important; }
+
+    .anchor-pt.top { top: -7px; left: calc(50% - 7px); }
+    .anchor-pt.bottom { bottom: -7px; left: calc(50% - 7px); }
+    .anchor-pt.left { left: -7px; top: calc(50% - 7px); }
+    .anchor-pt.right { right: -7px; top: calc(50% - 7px); }
+
+    /* SVG Lines & Endpoints */
+    .svg-line-path {
+      cursor: pointer; stroke-width: 2px; transition: stroke 0.15s; pointer-events: stroke;
+    }
+    .svg-line-path:hover { stroke: #38bdf8 !important; stroke-width: 3px; }
+    .svg-line-path.selected-line { stroke: #ef4444 !important; stroke-width: 3px; }
+    
+    .svg-hit-target {
+      cursor: pointer; pointer-events: stroke; fill: none; stroke: transparent; stroke-width: 18px;
+    }
+
+    .endpoint-handle {
+      cursor: grab; pointer-events: auto; fill: #ef4444; stroke: #ffffff; stroke-width: 2px;
+      transition: transform 0.15s;
+    }
+    .endpoint-handle:hover { transform: scale(1.5); fill: #22c55e; }
+
+    /* Line Badges */
+    .line-label-badge {
+      position: absolute; z-index: 40;
+      background: #182232; border: 1px solid #2d3f58; color: #94a3b8;
+      padding: 3px 8px; border-radius: 6px; font-size: 0.65rem;
+      font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap;
+      transform: translate(-50%, -50%); cursor: grab; box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      outline: none;
+    }
+    .line-label-badge:active { cursor: grabbing; }
+    .line-label-badge:hover { border-color: #38bdf8; color: #fff; }
+    .line-label-badge.selected-line { border-color: #ef4444; color: #fca5a5; background: #450a0a; }
+
+    #draft-path {
+      pointer-events: none; stroke: #38bdf8; stroke-width: 2.5px; stroke-dasharray: 5 5; fill: none; display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="toolbar">
+    <button class="tb-btn" onclick="addCard()"><i class="fa-solid fa-plus"></i> Add Card</button>
+    <button class="tb-btn" onclick="addFloatingLabel()"><i class="fa-solid fa-tag"></i> Add Label</button>
+    <div class="tb-divider"></div>
+    <button class="tb-btn" title="Undo (Ctrl+Z)" onclick="undo()"><i class="fa-solid fa-rotate-left"></i></button>
+    <button class="tb-btn" title="Redo (Ctrl+Y)" onclick="redo()"><i class="fa-solid fa-rotate-right"></i></button>
+    <div class="tb-divider"></div>
+    <button class="tb-btn danger" onclick="deleteSelected()" title="Delete Selected Item (Delete Key)"><i class="fa-solid fa-trash"></i> Delete</button>
+    <div class="tb-divider"></div>
+    <button class="tb-btn success" onclick="exportJSON()"><i class="fa-solid fa-download"></i> Save JSON</button>
+  </div>
+
+  <div id="canvas-container">
+    <svg id="svg-canvas">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+        </marker>
+        <marker id="arrow-selected" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444"/>
+        </marker>
+      </defs>
+      <path id="draft-path" />
+    </svg>
+  </div>
+
+  <script>
+    const DEFAULT_MAP_DATA = {
+      nodes: [
+        { id: "npoc", title: "External Partner: NPoC Network", subtitle: "Research/policy/advocacy on higher education in Kerala", url: "https://www.nayaneeth.com", x: 40, y: 40, color: "indigo", icon: "fa-diagram-project" },
+        { id: "edu_hub", title: "Skills & Education", subtitle: "Skill building, tech training, and climate literacy initiatives.", url: "", x: 500, y: 320, color: "emerald", icon: "fa-book-open" },
+        { id: "community", title: "Community Base", subtitle: "Pillar 2", url: "", x: 500, y: 470, color: "cyan", icon: "fa-users", innerFocus: "Youth & Commons" },
+        { id: "climate", title: "Climate & Biodiversity Action", subtitle: "Direct action, ecological preservation, and policy advocacy.", url: "", x: 880, y: 380, color: "emerald", icon: "fa-seedling" }
+      ],
+      connections: [
+        { from: "npoc", fromAnchor: "right", to: "edu_hub", toAnchor: "left", label: "POLICY" },
+        { from: "edu_hub", fromAnchor: "right", to: "climate", toAnchor: "left", label: "PLACE OWNERSHIP" },
+        { from: "community", fromAnchor: "right", to: "climate", toAnchor: "bottom", label: "INCLUSION" }
+      ],
+      floatingLabels: []
+    };
+
+    let mapData = JSON.parse(JSON.stringify(DEFAULT_MAP_DATA));
+    let historyStack = [];
+    let redoStack = [];
+    let clipboard = null; // Universal clipboard for nodes, lines, or labels
+
+    let selectedNodeId = null;
+    let selectedConnIndex = null;
+    let selectedFloatId = null;
+
+    let draggingCard = null;
+    let drawingLine = null;
+    let draggedEndpoint = null;
+    let draggedLabel = null;
+    let currentMousePos = { x: 0, y: 0 };
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+        const res = await fetch('data.json');
+        if (res.ok) {
+          const loaded = await res.json();
+          if (loaded && Array.isArray(loaded.nodes) && loaded.nodes.length > 0) {
+            mapData.nodes = loaded.nodes;
+            mapData.connections = Array.isArray(loaded.connections) ? loaded.connections : [];
+            mapData.floatingLabels = Array.isArray(loaded.floatingLabels) ? loaded.floatingLabels : [];
+          }
+        }
+      } catch (e) {
+        console.warn("Using default map dataset.");
+      }
+      
+      mapData.floatingLabels = mapData.floatingLabels || [];
+      saveState();
+      renderAll();
+    });
+
+    function safeNum(val, fallback) {
+      const num = parseFloat(val);
+      return isNaN(num) ? fallback : num;
+    }
+
+    function getCanvasPos(e) {
+      const container = document.getElementById('canvas-container');
+      const rect = container.getBoundingClientRect();
+      return {
+        x: e.clientX - rect.left + container.scrollLeft,
+        y: e.clientY - rect.top + container.scrollTop
+      };
+    }
+
+    function saveState() {
+      const stateStr = JSON.stringify(mapData);
+      if (historyStack.length > 0 && historyStack[historyStack.length - 1] === stateStr) return;
+      if (historyStack.length > 40) historyStack.shift();
+      historyStack.push(stateStr);
+      redoStack = [];
+    }
+
+    function undo() {
+      if (historyStack.length <= 1) return;
+      redoStack.push(historyStack.pop());
+      mapData = JSON.parse(historyStack[historyStack.length - 1]);
+      renderAll();
+    }
+
+    function redo() {
+      if (redoStack.length === 0) return;
+      const state = redoStack.pop();
+      historyStack.push(state);
+      mapData = JSON.parse(state);
+      renderAll();
+    }
+
+    function getAnchorCoords(nodeId, anchorName) {
+      const node = mapData.nodes.find(n => n.id === nodeId);
+      if (!node) return { x: 0, y: 0 };
+      
+      const el = document.getElementById(nodeId);
+      const w = el ? el.offsetWidth : 240;
+      const h = el ? el.offsetHeight : 80;
+
+      const nx = safeNum(node.x, 0);
+      const ny = safeNum(node.y, 0);
+
+      switch(anchorName) {
+        case 'top': return { x: nx + w / 2, y: ny };
+        case 'bottom': return { x: nx + w / 2, y: ny + h };
+        case 'left': return { x: nx, y: ny + h / 2 };
+        case 'right': return { x: nx + w, y: ny + h / 2 };
+        default: return { x: nx + w / 2, y: ny + h / 2 };
+      }
+    }
+
+    function renderAll() {
+      renderCards();
+      renderSVGConnections();
+      renderLabels();
+    }
+
+    function renderCards() {
+      const container = document.getElementById('canvas-container');
+      
+      mapData.nodes.forEach(node => {
+        const isSelected = selectedNodeId === node.id;
+        const nx = safeNum(node.x, 100);
+        const ny = safeNum(node.y, 100);
+        let wrapper = document.getElementById(node.id);
+        
+        if (!wrapper) {
+          wrapper = document.createElement('div');
+          wrapper.id = node.id;
+          wrapper.innerHTML = `
+            <div class="node">
+              <a href="#" target="_blank" class="url-badge" style="display:none;"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              <div class="icon-box"><i class="fa-solid"></i></div>
+              <div class="node-content">
+                <div class="title" data-type="title"></div>
+                <div class="subtitle" data-type="subtitle"></div>
+              </div>
+            </div>
+            <div class="anchor-pt top" data-anchor="top"></div>
+            <div class="anchor-pt right" data-anchor="right"></div>
+            <div class="anchor-pt bottom" data-anchor="bottom"></div>
+            <div class="anchor-pt left" data-anchor="left"></div>
+          `;
+          container.appendChild(wrapper);
+        }
+        
+        wrapper.className = `node-wrapper ${isSelected ? 'selected-wrapper' : ''}`;
+        wrapper.style.left = `${nx}px`;
+        wrapper.style.top = `${ny}px`;
+        
+        const nodeEl = wrapper.querySelector('.node');
+        nodeEl.className = `node ${node.color || 'slate'}`;
+        wrapper.querySelector('.icon-box i').className = `fa-solid ${node.icon || 'fa-circle-nodes'}`;
+        
+        const titleEl = wrapper.querySelector('.title');
+        if (titleEl.getAttribute('contenteditable') !== 'true') titleEl.textContent = node.title || '';
+        
+        const subEl = wrapper.querySelector('.subtitle');
+        const subText = node.subtitle || node.innerFocus || '';
+        if (subEl.getAttribute('contenteditable') !== 'true') subEl.textContent = subText;
+
+        const urlBadge = wrapper.querySelector('.url-badge');
+        if (node.url && node.url.trim() !== '') {
+          urlBadge.href = node.url;
+          urlBadge.style.display = 'block';
+        } else {
+          urlBadge.style.display = 'none';
+        }
+      });
+
+      const currentIds = mapData.nodes.map(n => n.id);
+      document.querySelectorAll('.node-wrapper').forEach(el => {
+        if (!currentIds.includes(el.id)) el.remove();
+      });
+    }
+
+    function renderSVGConnections() {
+      const svg = document.getElementById('svg-canvas');
+      document.querySelectorAll('#svg-canvas path:not(#draft-path), #svg-canvas circle.endpoint-handle').forEach(e => e.remove());
+
+      mapData.connections.forEach((conn, index) => {
+        if (conn.isDragging) return;
+
+        const fromAnchor = conn.fromAnchor || 'right';
+        const toAnchor = conn.toAnchor || 'left';
+        const fromPt = getAnchorCoords(conn.from, fromAnchor);
+        const toPt = getAnchorCoords(conn.to, toAnchor);
+
+        const x1 = safeNum(fromPt.x, 0); const y1 = safeNum(fromPt.y, 0);
+        const x2 = safeNum(toPt.x, 0);   const y2 = safeNum(toPt.y, 0);
+
+        const dx = Math.max(30, Math.abs(x2 - x1) * 0.4);
+        const dy = Math.max(30, Math.abs(y2 - y1) * 0.4);
+
+        let d = '';
+        if (fromAnchor === 'left' || fromAnchor === 'right') {
+          const cX1 = fromAnchor === 'right' ? x1 + dx : x1 - dx;
+          const cX2 = toAnchor === 'left' ? x2 - dx : x2 + dx;
+          d = `M ${x1} ${y1} C ${cX1} ${y1}, ${cX2} ${y2}, ${x2} ${y2}`;
+        } else {
+          const cY1 = fromAnchor === 'bottom' ? y1 + dy : y1 - dy;
+          const cY2 = toAnchor === 'top' ? y2 - dy : y2 + dy;
+          d = `M ${x1} ${y1} C ${x1} ${cY1}, ${x2} ${cY2}, ${x2} ${y2}`;
+        }
+
+        const isSelected = selectedConnIndex === index;
+
+        const hitTarget = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        hitTarget.setAttribute('d', d);
+        hitTarget.setAttribute('class', 'svg-hit-target');
+        hitTarget.setAttribute('data-conn-index', index);
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', d);
+        path.setAttribute('class', `svg-line-path ${isSelected ? 'selected-line' : ''}`);
+        path.setAttribute('data-path-index', index);
+        path.setAttribute('stroke', isSelected ? '#ef4444' : '#475569');
+        path.setAttribute('fill', 'none');
+        path.setAttribute('marker-end', isSelected ? 'url(#arrow-selected)' : 'url(#arrow)');
+
+        svg.appendChild(hitTarget);
+        svg.appendChild(path);
+
+        if (isSelected) {
+          [ { pt: fromPt, type: 'from' }, { pt: toPt, type: 'to' } ].forEach(handle => {
+            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            circle.setAttribute('cx', handle.pt.x);
+            circle.setAttribute('cy', handle.pt.y);
+            circle.setAttribute('r', '8');
+            circle.setAttribute('class', 'endpoint-handle');
+            circle.setAttribute('data-endpoint-type', handle.type);
+            circle.setAttribute('data-conn-index', index);
+            svg.appendChild(circle);
+          });
+        }
+      });
+    }
+
+    function renderLabels() {
+      const container = document.getElementById('canvas-container');
+
+      // Tethered Labels
+      mapData.connections.forEach((conn, index) => {
+        let badge = document.querySelector(`.line-label-badge.tethered[data-conn-index="${index}"]`);
+        
+        if (!conn.label || !conn.label.trim()) {
+          if (badge) badge.remove();
+          return;
+        }
+
+        if (!badge) {
+          badge = document.createElement('div');
+          badge.className = 'line-label-badge tethered';
+          badge.setAttribute('data-conn-index', index);
+          container.appendChild(badge);
+        }
+
+        const isSelected = selectedConnIndex === index;
+        badge.className = `line-label-badge tethered ${isSelected ? 'selected-line' : ''}`;
+        
+        if (badge.getAttribute('contenteditable') !== 'true') {
+          badge.textContent = conn.label.trim();
+        }
+
+        let midPt = { x: 0, y: 0 };
+        const path = document.querySelector(`.svg-line-path[data-path-index="${index}"]`);
+        if (path) {
+          try {
+            const pathLen = path.getTotalLength();
+            if (pathLen > 0) midPt = path.getPointAtLength(pathLen / 2);
+          } catch (e) {}
+        }
+
+        badge.style.left = `${midPt.x}px`;
+        badge.style.top = `${midPt.y}px`;
+      });
+
+      // Floating Labels
+      mapData.floatingLabels.forEach(label => {
+        let badge = document.querySelector(`.line-label-badge.floating[data-float-id="${label.id}"]`);
+        
+        if (!badge) {
+          badge = document.createElement('div');
+          badge.className = 'line-label-badge floating';
+          badge.setAttribute('data-float-id', label.id);
+          container.appendChild(badge);
+        }
+
+        const isSelected = selectedFloatId === label.id;
+        badge.className = `line-label-badge floating ${isSelected ? 'selected-line' : ''}`;
+        
+        if (badge.getAttribute('contenteditable') !== 'true') {
+          badge.textContent = label.text;
+        }
+
+        badge.style.left = `${safeNum(label.x, 100)}px`;
+        badge.style.top = `${safeNum(label.y, 100)}px`;
+      });
+
+      document.querySelectorAll('.line-label-badge.tethered').forEach(b => {
+        const idx = b.getAttribute('data-conn-index');
+        if (!mapData.connections[idx] || !mapData.connections[idx].label) b.remove();
+      });
+      const floatIds = mapData.floatingLabels.map(l => l.id);
+      document.querySelectorAll('.line-label-badge.floating').forEach(b => {
+        if (!floatIds.includes(b.getAttribute('data-float-id'))) b.remove();
+      });
+    }
+
+    // --- INSTANT INLINE TEXT EDITING ---
+
+    document.addEventListener('dblclick', (e) => {
+      const editable = e.target.closest('.title, .subtitle, .line-label-badge');
+      if (editable) {
+        e.stopPropagation();
+        editable.setAttribute('contenteditable', 'true');
+        editable.focus();
+        
+        const range = document.createRange();
+        range.selectNodeContents(editable);
+        const sel = window.getSelection();
+        if (sel) { sel.removeAllRanges(); sel.addRange(range); }
+      }
+    });
+
+    // Double-click blank card space to add/edit URL
+document.addEventListener('dblclick', (e) => {
+  const nodeEl = e.target.closest('.node');
+  if (nodeEl && !e.target.closest('.title, .subtitle, .icon-box, .line-label-badge')) {
+    e.stopPropagation();
+    const wrapper = nodeEl.closest('.node-wrapper');
+    const node = mapData.nodes.find(n => n.id === wrapper.id);
+    
+    const newUrl = prompt("Enter Link (URL) for this card:", node.url || '');
+    if (newUrl !== null) {
+      saveState();
+      node.url = newUrl.trim();
+      renderAll();
+    }
+  }
+});
+
+    document.addEventListener('focusout', (e) => {
+      const editable = e.target.closest('.title, .subtitle, .line-label-badge');
+      if (editable && editable.getAttribute('contenteditable') === 'true') {
+        editable.setAttribute('contenteditable', 'false');
+        window.getSelection()?.removeAllRanges();
+        
+        saveState();
+        const text = editable.textContent.trim();
+
+        if (editable.classList.contains('title') || editable.classList.contains('subtitle')) {
+          const wrapper = editable.closest('.node-wrapper');
+          const node = mapData.nodes.find(n => n.id === wrapper.id);
+          if (node) {
+            if (editable.classList.contains('title')) node.title = text;
+            else node.subtitle = text;
+          }
+        } 
+        else if (editable.classList.contains('line-label-badge')) {
+          const upperText = text.toUpperCase();
+          if (editable.classList.contains('tethered')) {
+            const idx = editable.getAttribute('data-conn-index');
+            if (mapData.connections[idx]) mapData.connections[idx].label = upperText;
+          } else {
+            const floatId = editable.getAttribute('data-float-id');
+            const fl = mapData.floatingLabels.find(l => l.id === floatId);
+            if (fl) {
+              fl.text = upperText;
+              if (!upperText) mapData.floatingLabels = mapData.floatingLabels.filter(l => l.id !== fl.id);
+            }
+          }
+        }
+        renderAll();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && e.target.getAttribute('contenteditable') === 'true') {
+        e.preventDefault(); e.target.blur();
+      }
+    });
+
+    // --- MOUSE DOWN EVENTS & SELECTION ---
+
+    document.addEventListener('mousedown', (e) => {
+      if (e.target.closest('[contenteditable="true"], .url-badge')) return;
+
+      const pos = getCanvasPos(e);
+      currentMousePos = pos;
+
+      // 1. Color Theme Cycle
+      const iconBox = e.target.closest('.icon-box');
+      if (iconBox) {
+        e.stopPropagation();
+        saveState();
+        const wrapper = iconBox.closest('.node-wrapper');
+        const node = mapData.nodes.find(n => n.id === wrapper.id);
+        if (node) {
+          const colors = ['emerald', 'indigo', 'slate', 'amber', 'rose', 'cyan'];
+          node.color = colors[(colors.indexOf(node.color || 'slate') + 1) % colors.length];
+          renderCards();
+        }
+        return;
+      }
+
+      // 2. Line Endpoint Dragging
+      const endpoint = e.target.closest('.endpoint-handle');
+      if (endpoint) {
+        e.stopPropagation();
+        saveState();
+        const idx = endpoint.getAttribute('data-conn-index');
+        draggedEndpoint = { connIndex: idx, endpointType: endpoint.getAttribute('data-endpoint-type') };
+        mapData.connections[idx].isDragging = true;
+        renderConnections();
+        document.querySelectorAll('.anchor-pt').forEach(a => a.classList.add('show-all'));
+        return;
+      }
+
+      // 3. Line Label Dragging & Selection
+      const badge = e.target.closest('.line-label-badge');
+      if (badge) {
+        e.stopPropagation();
+        saveState();
+
+        if (badge.classList.contains('tethered')) {
+          selectedConnIndex = parseInt(badge.getAttribute('data-conn-index'));
+          selectedNodeId = null; selectedFloatId = null;
+        } else {
+          selectedFloatId = badge.getAttribute('data-float-id');
+          selectedNodeId = null; selectedConnIndex = null;
+        }
+        renderAll();
+
+        draggedLabel = {
+          el: badge,
+          sourceType: badge.classList.contains('floating') ? 'float' : 'conn',
+          sourceId: badge.getAttribute('data-float-id'),
+          sourceIndex: badge.getAttribute('data-conn-index'),
+          offsetX: pos.x - parseFloat(badge.style.left),
+          offsetY: pos.y - parseFloat(badge.style.top)
+        };
+        return;
+      }
+
+      // 4. Line Selection
+      const hitPath = e.target.closest('.svg-hit-target, .svg-line-path');
+      if (hitPath) {
+        e.stopPropagation();
+        selectedConnIndex = parseInt(hitPath.getAttribute('data-conn-index'));
+        selectedNodeId = null; selectedFloatId = null;
+        renderAll();
+        return;
+      }
+
+      // 5. Draw Line from Anchor Dot
+      const anchorEl = e.target.closest('.anchor-pt');
+      if (anchorEl) {
+        e.stopPropagation(); e.preventDefault();
+        saveState();
+        const wrapper = anchorEl.closest('.node-wrapper');
+        const anchorName = anchorEl.getAttribute('data-anchor');
+        const coords = getAnchorCoords(wrapper.id, anchorName);
+
+        drawingLine = { fromId: wrapper.id, fromAnchor: anchorName, x1: coords.x, y1: coords.y };
+        const draft = document.getElementById('draft-path');
+        draft.setAttribute('d', `M ${coords.x} ${coords.y} L ${pos.x} ${pos.y}`);
+        draft.style.display = 'block';
+        document.querySelectorAll('.anchor-pt').forEach(a => a.classList.add('show-all'));
+        return;
+      }
+
+      // 6. Card Selection & Dragging
+      const nodeEl = e.target.closest('.node');
+      if (nodeEl) {
+        e.stopPropagation();
+        const wrapper = nodeEl.closest('.node-wrapper');
+        const node = mapData.nodes.find(n => n.id === wrapper.id);
+
+        if (e.ctrlKey && node.url) { window.open(node.url, '_blank'); return; }
+
+        selectedNodeId = wrapper.id;
+        selectedConnIndex = null; selectedFloatId = null;
+        renderAll();
+
+        draggingCard = { node: node, offsetX: pos.x - safeNum(node.x, 0), offsetY: pos.y - safeNum(node.y, 0) };
+        return;
+      }
+
+      // 7. Blank Canvas Click
+      if (e.target.closest('#canvas-container, svg')) {
+        selectedNodeId = null; selectedConnIndex = null; selectedFloatId = null;
+        renderAll();
+      }
+    });
+
+    // --- GLOBAL DRAG MOVEMENT ---
+
+    document.addEventListener('mousemove', (e) => {
+      const pos = getCanvasPos(e);
+      currentMousePos = pos;
+
+      if (draggedLabel) {
+        draggedLabel.el.style.left = `${pos.x - draggedLabel.offsetX}px`;
+        draggedLabel.el.style.top = `${pos.y - draggedLabel.offsetY}px`;
+      } 
+      else if (drawingLine) {
+        const x1 = drawingLine.x1; const y1 = drawingLine.y1;
+        const dx = Math.max(30, Math.abs(pos.x - x1) * 0.4);
+        document.getElementById('draft-path').setAttribute('d', `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${pos.x - dx} ${pos.y}, ${pos.x} ${pos.y}`);
+      } 
+      else if (draggedEndpoint) {
+        const conn = mapData.connections[draggedEndpoint.connIndex];
+        const fixedNodeId = draggedEndpoint.endpointType === 'from' ? conn.to : conn.from;
+        const fixedAnchor = draggedEndpoint.endpointType === 'from' ? (conn.toAnchor || 'left') : (conn.fromAnchor || 'right');
+        const startPt = getAnchorCoords(fixedNodeId, fixedAnchor);
+
+        const x1 = startPt.x; const y1 = startPt.y;
+        const dx = Math.max(30, Math.abs(pos.x - x1) * 0.4);
+        const draft = document.getElementById('draft-path');
+        draft.setAttribute('d', `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${pos.x - dx} ${pos.y}, ${pos.x} ${pos.y}`);
+        draft.style.display = 'block';
+      } 
+      else if (draggingCard) {
+        draggingCard.node.x = pos.x - draggingCard.offsetX;
+        draggingCard.node.y = pos.y - draggingCard.offsetY;
+        const wrapper = document.getElementById(draggingCard.node.id);
+        if (wrapper) {
+          wrapper.style.left = `${draggingCard.node.x}px`;
+          wrapper.style.top = `${draggingCard.node.y}px`;
+        }
+        renderConnections();
+        renderLabels();
+      }
+    });
+
+    // --- GLOBAL DROP HANDLERS ---
+
+    document.addEventListener('mouseup', (e) => {
+      if (draggedLabel) {
+        draggedLabel.el.style.pointerEvents = 'none';
+        const dropEl = document.elementFromPoint(e.clientX, e.clientY);
+        draggedLabel.el.style.pointerEvents = 'auto';
+
+        const hitPath = dropEl ? dropEl.closest('.svg-hit-target') : null;
+        const text = draggedLabel.el.textContent.trim().toUpperCase();
+
+        if (draggedLabel.sourceType === 'conn') {
+          if (mapData.connections[draggedLabel.sourceIndex]) mapData.connections[draggedLabel.sourceIndex].label = '';
+        } else {
+          mapData.floatingLabels = mapData.floatingLabels.filter(l => l.id !== draggedLabel.sourceId);
+        }
+
+        if (hitPath) {
+          const idx = hitPath.getAttribute('data-conn-index');
+          if (mapData.connections[idx]) mapData.connections[idx].label = text;
+        } else {
+          const pos = getCanvasPos(e);
+          if (text) mapData.floatingLabels.push({ id: `float_${Date.now()}`, text: text, x: pos.x, y: pos.y });
+        }
+        
+        draggedLabel = null;
+        renderAll();
+      } 
+      else if (drawingLine || draggedEndpoint) {
+        const svg = document.getElementById('svg-canvas');
+        svg.style.pointerEvents = 'none';
+        const dropEl = document.elementFromPoint(e.clientX, e.clientY);
+        svg.style.pointerEvents = 'auto';
+
+        const anchorEl = dropEl ? dropEl.closest('.anchor-pt') : null;
+        const wrapperEl = dropEl ? dropEl.closest('.node-wrapper') : null;
+
+        if (drawingLine) {
+          if (anchorEl) {
+            const toId = anchorEl.closest('.node-wrapper').id;
+            if (toId !== drawingLine.fromId) {
+              mapData.connections.push({
+                from: drawingLine.fromId, fromAnchor: drawingLine.fromAnchor,
+                to: toId, toAnchor: anchorEl.getAttribute('data-anchor'), label: ""
+              });
+            }
+          } else if (wrapperEl) {
+            if (wrapperEl.id !== drawingLine.fromId) {
+              mapData.connections.push({
+                from: drawingLine.fromId, fromAnchor: drawingLine.fromAnchor,
+                to: wrapperEl.id, toAnchor: "left", label: ""
+              });
+            }
+          }
+          drawingLine = null;
+        } 
+        else if (draggedEndpoint) {
+          const conn = mapData.connections[draggedEndpoint.connIndex];
+          if (conn) {
+            conn.isDragging = false;
+            if (anchorEl) {
+              if (draggedEndpoint.endpointType === 'from') {
+                conn.from = anchorEl.closest('.node-wrapper').id;
+                conn.fromAnchor = anchorEl.getAttribute('data-anchor');
+              } else {
+                conn.to = anchorEl.closest('.node-wrapper').id;
+                conn.toAnchor = anchorEl.getAttribute('data-anchor');
+              }
+            } else if (wrapperEl) {
+              if (draggedEndpoint.endpointType === 'from') {
+                conn.from = wrapperEl.id;
+                conn.fromAnchor = 'right';
+              } else {
+                conn.to = wrapperEl.id;
+                conn.toAnchor = 'left';
+              }
+            }
+          }
+          draggedEndpoint = null;
+        }
+
+        document.getElementById('draft-path').style.display = 'none';
+        document.querySelectorAll('.anchor-pt').forEach(a => a.classList.remove('show-all'));
+        renderAll();
+      } 
+      else if (draggingCard) {
+        saveState();
+        draggingCard = null;
+      }
+    });
+
+    // --- FULL SHORTCUTS & CLIPBOARD SUITE (CARDS, LINES, LABELS) ---
+
+    document.addEventListener('keydown', (e) => {
+      if (e.target.closest('[contenteditable="true"], input, textarea')) return;
+
+      const isCtrl = e.ctrlKey || e.metaKey;
+      const key = e.key.toLowerCase();
+
+      if (isCtrl && key === 'z') {
+        e.preventDefault(); if (e.shiftKey) redo(); else undo();
+      } else if (isCtrl && key === 'y') {
+        e.preventDefault(); redo();
+      } else if (isCtrl && key === 'c') {
+        e.preventDefault(); copySelected();
+      } else if (isCtrl && key === 'x') {
+        e.preventDefault(); copySelected(); deleteSelected();
+      } else if (isCtrl && key === 'v') {
+        e.preventDefault(); pasteSelected();
+      } else if (e.key === 'Delete' || e.key === 'Backspace') {
+        deleteSelected();
+      }
+    });
+
+    function copySelected() {
+      if (selectedNodeId) {
+        const node = mapData.nodes.find(n => n.id === selectedNodeId);
+        if (node) clipboard = { type: 'node', data: JSON.parse(JSON.stringify(node)) };
+      } else if (selectedConnIndex !== null) {
+        const conn = mapData.connections[selectedConnIndex];
+        if (conn) clipboard = { type: 'conn', data: JSON.parse(JSON.stringify(conn)) };
+      } else if (selectedFloatId !== null) {
+        const fl = mapData.floatingLabels.find(l => l.id === selectedFloatId);
+        if (fl) clipboard = { type: 'float', data: JSON.parse(JSON.stringify(fl)) };
+      }
+    }
+
+    function pasteSelected() {
+      if (!clipboard) return;
+      saveState();
+
+      if (clipboard.type === 'node') {
+        const newNode = JSON.parse(JSON.stringify(clipboard.data));
+        newNode.id = `node_${Date.now()}`;
+        newNode.x = (currentMousePos.x > 0 ? currentMousePos.x : safeNum(newNode.x, 100)) + 30;
+        newNode.y = (currentMousePos.y > 0 ? currentMousePos.y : safeNum(newNode.y, 100)) + 30;
+        mapData.nodes.push(newNode);
+        selectedNodeId = newNode.id;
+        selectedConnIndex = null; selectedFloatId = null;
+      } 
+      else if (clipboard.type === 'float') {
+        const newFl = JSON.parse(JSON.stringify(clipboard.data));
+        newFl.id = `float_${Date.now()}`;
+        newFl.x = (currentMousePos.x > 0 ? currentMousePos.x : safeNum(newFl.x, 100)) + 20;
+        newFl.y = (currentMousePos.y > 0 ? currentMousePos.y : safeNum(newFl.y, 100)) + 20;
+        mapData.floatingLabels.push(newFl);
+        selectedFloatId = newFl.id;
+        selectedNodeId = null; selectedConnIndex = null;
+      } 
+      else if (clipboard.type === 'conn') {
+        const newConn = JSON.parse(JSON.stringify(clipboard.data));
+        mapData.connections.push(newConn);
+        selectedConnIndex = mapData.connections.length - 1;
+        selectedNodeId = null; selectedFloatId = null;
+      }
+      renderAll();
+    }
+
+    // --- TOOLBAR ACTIONS ---
+
+    function addCard() {
+      saveState();
+      const newId = `node_${Date.now()}`;
+      mapData.nodes.push({
+        id: newId, title: "NEW PARTNER", subtitle: "Description...",
+        url: "", x: 450, y: 250, color: "emerald", icon: "fa-circle-nodes"
+      });
+      selectedNodeId = newId;
+      renderAll();
+
+      setTimeout(() => {
+        const titleEl = document.querySelector(`#${newId} .title`);
+        if (titleEl) titleEl.dispatchEvent(new MouseEvent('dblclick', { bubbles: true }));
+      }, 10);
+    }
+
+    function addFloatingLabel() {
+      saveState();
+      const newId = `float_${Date.now()}`;
+      const container = document.getElementById('canvas-container');
+      const centerX = container.scrollLeft + window.innerWidth / 2;
+      const centerY = container.scrollTop + window.innerHeight / 2 - 100;
+
+      mapData.floatingLabels.push({
+        id: newId, text: "NEW LABEL", x: centerX, y: centerY
+      });
+      renderAll();
+
+      setTimeout(() => {
+        const badge = document.querySelector(`.line-label-badge.floating[data-float-id="${newId}"]`);
+        if (badge) badge.dispatchEvent(new MouseEvent('dblclick', { bubbles: true }));
+      }, 10);
+    }
+
+    function deleteSelected() {
+      if (selectedNodeId) {
+        saveState();
+        mapData.nodes = mapData.nodes.filter(n => n.id !== selectedNodeId);
+        mapData.connections = mapData.connections.filter(c => c.from !== selectedNodeId && c.to !== selectedNodeId);
+        selectedNodeId = null;
+        renderAll();
+      } else if (selectedConnIndex !== null) {
+        saveState();
+        mapData.connections.splice(selectedConnIndex, 1);
+        selectedConnIndex = null;
+        renderAll();
+      } else if (selectedFloatId !== null) {
+        saveState();
+        mapData.floatingLabels = mapData.floatingLabels.filter(l => l.id !== selectedFloatId);
+        selectedFloatId = null;
+        renderAll();
+      }
+    }
+
+    function exportJSON() {
+      const jsonStr = JSON.stringify(mapData, null, 2);
+      const blob = new Blob([jsonStr], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.click ? URL.createObjectURL(blob) : '';
+      a.download = 'data.json';
+      a.click();
+    }
+  </script>
+</body>
+</html>

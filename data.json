@@ -1,0 +1,237 @@
+{
+  "nodes": [
+    {
+      "id": "npoc",
+      "title": "NPoC Network",
+      "subtitle": "External Partner",
+      "x": 20,
+      "y": 96,
+      "color": "emerald",
+      "icon": "fa-circle-nodes",
+      "url": "https://www.nayaneethi.com/",
+      "shape": "card",
+      "innerFocus": ""
+    },
+    {
+      "id": "edu_hub",
+      "title": "Skills & education",
+      "subtitle": "Pillar 1",
+      "x": 377,
+      "y": 209,
+      "color": "indigo",
+      "icon": "fa-graduation-cap",
+      "shape": "card",
+      "innerFocus": "Skills Core"
+    },
+    {
+      "id": "state_reg",
+      "title": "State Regulations",
+      "subtitle": "Oversight & Policy",
+      "x": 424,
+      "y": 24,
+      "color": "slate",
+      "icon": "fa-building-columns",
+      "shape": "card",
+      "innerFocus": ""
+    },
+    {
+      "id": "community",
+      "title": "Community Base",
+      "subtitle": "Pillar 2",
+      "x": 364,
+      "y": 409,
+      "color": "cyan",
+      "icon": "fa-users",
+      "shape": "card",
+      "innerFocus": "Youth & Commons"
+    },
+    {
+      "id": "climate",
+      "title": "Climate & Biodiversity",
+      "subtitle": "Pillar 0",
+      "x": 930,
+      "y": 167,
+      "color": "amber",
+      "icon": "fa-seedling",
+      "shape": "card",
+      "innerFocus": ""
+    },
+    {
+      "id": "ventures",
+      "title": "Industy & Entrepreurship",
+      "subtitle": "Secondary outcome",
+      "x": 1093,
+      "y": 427,
+      "color": "rose",
+      "icon": "fa-rocket",
+      "shape": "card",
+      "innerFocus": ""
+    },
+    {
+      "id": "income",
+      "title": "Livelihoods & Income growth",
+      "subtitle": "Primary Outcome",
+      "x": 1339,
+      "y": 149,
+      "color": "amber",
+      "icon": "fa-star",
+      "shape": "circle",
+      "innerFocus": "Through markets & livihoods"
+    },
+    {
+      "id": "node_1780911184569",
+      "title": "TinkerHub ",
+      "subtitle": "experimentation hub",
+      "x": 20,
+      "y": 221.0701413059004,
+      "color": "emerald",
+      "icon": "fa-circle-nodes",
+      "url": "https://tinkerhub.org/",
+      "shape": "card",
+      "innerFocus": ""
+    },
+    {
+      "id": "node_1780911351535",
+      "title": "Citizen Digital Foundation",
+      "subtitle": "awareness creation ",
+      "x": 42.91676056897904,
+      "y": 337.82428507568375,
+      "color": "emerald",
+      "icon": "fa-circle-nodes",
+      "url": "https://citizendigitalfoundation.org/",
+      "shape": "card",
+      "innerFocus": ""
+    },
+    {
+      "id": "node_1780911725257",
+      "title": "Aikyam ",
+      "subtitle": "Changemaking",
+      "x": 40.64288859957708,
+      "y": 532.4601840779299,
+      "color": "slate",
+      "icon": "fa-circle-nodes",
+      "url": "https://aikyamhq.com/",
+      "shape": "card",
+      "innerFocus": ""
+    },
+    {
+      "id": "node_1780911745519",
+      "title": "Hume Centre",
+      "subtitle": "Livelihoods & ecology",
+      "x": 503,
+      "y": 640.3513815571334,
+      "color": "slate",
+      "icon": "fa-circle-nodes",
+      "url": "https://www.humecentre.in/index.html",
+      "shape": "card",
+      "innerFocus": ""
+    },
+    {
+      "id": "node_1780912675866",
+      "title": "ARPO",
+      "subtitle": "Community narrative building",
+      "x": 139.40059892902104,
+      "y": 649.0745030924879,
+      "color": "indigo",
+      "icon": "fa-circle-nodes",
+      "url": "https://www.arpo.in/",
+      "shape": "card",
+      "innerFocus": ""
+    },
+    {
+      "id": "node_1780913142285",
+      "title": "TAGS Forum",
+      "subtitle": "Place ownership & climate action",
+      "x": 798,
+      "y": 627.8676642180708,
+      "color": "indigo",
+      "icon": "fa-circle-nodes",
+      "url": "https://tagsforum.com/",
+      "shape": "card",
+      "innerFocus": ""
+    }
+  ],
+  "connections": [
+    {
+      "from": "npoc",
+      "to": "edu_hub",
+      "label": "Policy"
+    },
+    {
+      "from": "state_reg",
+      "to": "climate",
+      "label": "Controls and Regulates "
+    },
+    {
+      "from": "edu_hub",
+      "to": "climate",
+      "label": "Opportunity creation and access"
+    },
+    {
+      "from": "community",
+      "to": "climate",
+      "label": "Inclusion"
+    },
+    {
+      "from": "climate",
+      "to": "income",
+      "label": "Yields"
+    },
+    {
+      "from": "climate",
+      "to": "ventures",
+      "label": "Spin-Offs"
+    },
+    {
+      "from": "state_reg",
+      "to": "edu_hub",
+      "label": "oversee, subsidise, regulate"
+    },
+    {
+      "from": "node_1780911184569",
+      "to": "edu_hub",
+      "label": "Skill building"
+    },
+    {
+      "from": "node_1780911351535",
+      "to": "edu_hub",
+      "label": "tech literacy"
+    },
+    {
+      "from": "node_1780911351535",
+      "to": "community",
+      "label": "empowerment, dialogue creation"
+    },
+    {
+      "from": "community",
+      "to": "node_1780911725257",
+      "label": "Social entreprenurship"
+    },
+    {
+      "from": "community",
+      "to": "node_1780911745519",
+      "label": "Community epowerment"
+    },
+    {
+      "from": "community",
+      "to": "node_1780912675866",
+      "label": "Media & narratives"
+    },
+    {
+      "from": "climate",
+      "to": "node_1780911745519",
+      "label": "Ecological preservation"
+    },
+    {
+      "from": "node_1780913142285",
+      "to": "community",
+      "label": "Community action"
+    },
+    {
+      "from": "node_1780913142285",
+      "to": "climate",
+      "label": "Ecological preservation"
+    }
+  ],
+  "lineStyle": "smooth"
+}
