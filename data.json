@@ -4,234 +4,349 @@
       "id": "npoc",
       "title": "NPoC Network",
       "subtitle": "External Partner",
-      "x": 20,
-      "y": 96,
+      "x": 48,
+      "y": 185,
       "color": "emerald",
-      "icon": "fa-circle-nodes",
-      "url": "https://www.nayaneethi.com/",
-      "shape": "card",
-      "innerFocus": ""
+      "icon": "fa-diagram-project",
+      "url": "https://www.nayaneethi.com/"
     },
     {
-      "id": "edu_hub",
-      "title": "Skills & education",
-      "subtitle": "Pillar 1",
-      "x": 377,
-      "y": 209,
+      "id": "tinkerhub",
+      "title": "TinkerHub",
+      "subtitle": "Learning & experimentation hub",
+      "x": 50,
+      "y": 288,
+      "color": "emerald",
+      "icon": "fa-diagram-project",
+      "url": "https://tinkerhub.org/tinkerspace"
+    },
+    {
+      "id": "cdf",
+      "title": "Citizen Digital Foundation",
+      "subtitle": "Community awareness & skilling",
+      "x": 46,
+      "y": 395,
+      "color": "emerald",
+      "icon": "fa-diagram-project",
+      "url": "https://citizendigitalfoundation.org/"
+    },
+    {
+      "id": "ilab",
+      "title": "ILAB",
+      "subtitle": "Education & community development",
+      "x": 45,
+      "y": 532,
+      "color": "emerald",
+      "icon": "fa-diagram-project",
+      "url": "https://ilabindia.org/"
+    },
+    {
+      "id": "rsc",
+      "title": "Regional Science Centre & Planetarium, Calicut",
+      "subtitle": "Education & community development",
+      "x": 50,
+      "y": 650,
+      "color": "emerald",
+      "icon": "fa-diagram-project",
+      "url": "https://rscpcalicut.org.in/"
+    },
+    {
+      "id": "ipm",
+      "title": "Institute of Palliative Medicine",
+      "subtitle": "Skilling & Community development",
+      "x": 50,
+      "y": 790,
+      "color": "emerald",
+      "icon": "fa-diagram-project",
+      "url": "https://www.instituteofpalliativemedicine.org/"
+    },
+    {
+      "id": "longhouse",
+      "title": "Long House Collective",
+      "subtitle": "Art & community",
+      "x": 140,
+      "y": 970,
+      "color": "slate",
+      "icon": "fa-diagram-project",
+      "url": "https://www.instagram.com/thelonghousecollective/"
+    },
+    {
+      "id": "indic",
+      "title": "Indic Digital Archive Foundation",
+      "subtitle": "Heritage preservation & archival",
+      "x": 500,
+      "y": 970,
+      "color": "slate",
+      "icon": "fa-diagram-project",
+      "url": "https://indicarchive.org/"
+    },
+    {
+      "id": "aikyam",
+      "title": "Aikyam",
+      "subtitle": "Changemaking",
+      "x": 772,
+      "y": 973,
+      "color": "slate",
+      "icon": "fa-diagram-project",
+      "url": "https://aikyamhq.com/"
+    },
+    {
+      "id": "arpo",
+      "title": "ARPO",
+      "subtitle": "Community narrative building",
+      "x": 1053,
+      "y": 964,
       "color": "indigo",
-      "icon": "fa-graduation-cap",
-      "shape": "card",
-      "innerFocus": "Skills Core"
+      "icon": "fa-diagram-project",
+      "url": "https://www.arpo.in/about"
+    },
+    {
+      "id": "hume",
+      "title": "Hume Centre",
+      "subtitle": "Livelihoods & ecology",
+      "x": 1364,
+      "y": 954,
+      "color": "slate",
+      "icon": "fa-diagram-project",
+      "url": "https://www.humecentre.in/index.html"
+    },
+    {
+      "id": "tags",
+      "title": "TAGS Forum",
+      "subtitle": "Place ownership & climate action",
+      "x": 1634,
+      "y": 931,
+      "color": "indigo",
+      "icon": "fa-diagram-project",
+      "url": "https://tagsforum.com/"
+    },
+    {
+      "id": "greenworms",
+      "title": "Green Worms",
+      "subtitle": "Livelihoods & climate action",
+      "x": 1617,
+      "y": 699,
+      "color": "indigo",
+      "icon": "fa-diagram-project",
+      "url": "https://www.greenworms.org/"
     },
     {
       "id": "state_reg",
       "title": "State Regulations",
       "subtitle": "Oversight & Policy",
-      "x": 424,
-      "y": 24,
+      "x": 652,
+      "y": 180,
       "color": "slate",
-      "icon": "fa-building-columns",
-      "shape": "card",
-      "innerFocus": ""
+      "icon": "fa-building-columns"
+    },
+    {
+      "id": "edu_hub",
+      "title": "Skills & Education",
+      "subtitle": "Pillar 1",
+      "x": 659,
+      "y": 371,
+      "color": "indigo",
+      "icon": "fa-graduation-cap"
     },
     {
       "id": "community",
       "title": "Community Base",
       "subtitle": "Pillar 2",
-      "x": 364,
-      "y": 409,
+      "x": 654,
+      "y": 567,
       "color": "cyan",
-      "icon": "fa-users",
-      "shape": "card",
-      "innerFocus": "Youth & Commons"
+      "icon": "fa-users"
     },
     {
       "id": "climate",
       "title": "Climate & Biodiversity",
       "subtitle": "Pillar 0",
-      "x": 930,
-      "y": 167,
+      "x": 1179,
+      "y": 309,
       "color": "amber",
-      "icon": "fa-seedling",
-      "shape": "card",
-      "innerFocus": ""
-    },
-    {
-      "id": "ventures",
-      "title": "Industy & Entrepreurship",
-      "subtitle": "Secondary outcome",
-      "x": 1093,
-      "y": 427,
-      "color": "rose",
-      "icon": "fa-rocket",
-      "shape": "card",
-      "innerFocus": ""
+      "icon": "fa-seedling"
     },
     {
       "id": "income",
       "title": "Livelihoods & Income growth",
       "subtitle": "Primary Outcome",
-      "x": 1339,
-      "y": 149,
+      "x": 1572,
+      "y": 278,
       "color": "amber",
-      "icon": "fa-star",
-      "shape": "circle",
-      "innerFocus": "Through markets & livihoods"
+      "icon": "fa-star"
     },
     {
-      "id": "node_1780911184569",
-      "title": "TinkerHub ",
-      "subtitle": "experimentation hub",
-      "x": 20,
-      "y": 221.0701413059004,
-      "color": "emerald",
-      "icon": "fa-circle-nodes",
-      "url": "https://tinkerhub.org/",
-      "shape": "card",
-      "innerFocus": ""
-    },
-    {
-      "id": "node_1780911351535",
-      "title": "Citizen Digital Foundation",
-      "subtitle": "awareness creation ",
-      "x": 42.91676056897904,
-      "y": 337.82428507568375,
-      "color": "emerald",
-      "icon": "fa-circle-nodes",
-      "url": "https://citizendigitalfoundation.org/",
-      "shape": "card",
-      "innerFocus": ""
-    },
-    {
-      "id": "node_1780911725257",
-      "title": "Aikyam ",
-      "subtitle": "Changemaking",
-      "x": 40.64288859957708,
-      "y": 532.4601840779299,
-      "color": "slate",
-      "icon": "fa-circle-nodes",
-      "url": "https://aikyamhq.com/",
-      "shape": "card",
-      "innerFocus": ""
-    },
-    {
-      "id": "node_1780911745519",
-      "title": "Hume Centre",
-      "subtitle": "Livelihoods & ecology",
-      "x": 503,
-      "y": 640.3513815571334,
-      "color": "slate",
-      "icon": "fa-circle-nodes",
-      "url": "https://www.humecentre.in/index.html",
-      "shape": "card",
-      "innerFocus": ""
-    },
-    {
-      "id": "node_1780912675866",
-      "title": "ARPO",
-      "subtitle": "Community narrative building",
-      "x": 139.40059892902104,
-      "y": 649.0745030924879,
-      "color": "indigo",
-      "icon": "fa-circle-nodes",
-      "url": "https://www.arpo.in/",
-      "shape": "card",
-      "innerFocus": ""
-    },
-    {
-      "id": "node_1780913142285",
-      "title": "TAGS Forum",
-      "subtitle": "Place ownership & climate action",
-      "x": 798,
-      "y": 627.8676642180708,
-      "color": "indigo",
-      "icon": "fa-circle-nodes",
-      "url": "https://tagsforum.com/",
-      "shape": "card",
-      "innerFocus": ""
+      "id": "ventures",
+      "title": "Industy & Entrepreneurship",
+      "subtitle": "Secondary outcome",
+      "x": 1577,
+      "y": 417,
+      "color": "rose",
+      "icon": "fa-rocket"
     }
   ],
   "connections": [
     {
       "from": "npoc",
+      "fromAnchor": "right",
       "to": "edu_hub",
-      "label": "Policy"
+      "toAnchor": "left",
+      "label": "POLICY"
+    },
+    {
+      "from": "tinkerhub",
+      "fromAnchor": "right",
+      "to": "edu_hub",
+      "toAnchor": "left",
+      "label": "SKILL BUILDING"
+    },
+    {
+      "from": "cdf",
+      "fromAnchor": "right",
+      "to": "edu_hub",
+      "toAnchor": "left",
+      "label": "TECH LITERACY"
+    },
+    {
+      "from": "cdf",
+      "fromAnchor": "right",
+      "to": "community",
+      "toAnchor": "left",
+      "label": "EMPOWERMENT"
+    },
+    {
+      "from": "ilab",
+      "fromAnchor": "right",
+      "to": "community",
+      "toAnchor": "left",
+      "label": "EMPOWERMENT"
+    },
+    {
+      "from": "rsc",
+      "fromAnchor": "right",
+      "to": "community",
+      "toAnchor": "left",
+      "label": "CULTURAL PRESERVATION"
+    },
+    {
+      "from": "ipm",
+      "fromAnchor": "right",
+      "to": "community",
+      "toAnchor": "left",
+      "label": "CULTURAL PRESERVATION"
+    },
+    {
+      "from": "longhouse",
+      "fromAnchor": "top",
+      "to": "community",
+      "toAnchor": "bottom",
+      "label": "CULTURAL PRESERVATION"
+    },
+    {
+      "from": "indic",
+      "fromAnchor": "top",
+      "to": "community",
+      "toAnchor": "bottom",
+      "label": "CULTURAL PRESERVATION"
+    },
+    {
+      "from": "aikyam",
+      "fromAnchor": "top",
+      "to": "community",
+      "toAnchor": "bottom",
+      "label": "SOCIAL ENTREPRENEURSHIP"
+    },
+    {
+      "from": "arpo",
+      "fromAnchor": "top",
+      "to": "community",
+      "toAnchor": "bottom",
+      "label": "MEDIA & NARRATIVES"
+    },
+    {
+      "from": "hume",
+      "fromAnchor": "top",
+      "to": "community",
+      "toAnchor": "bottom",
+      "label": "COMMUNITY EPOWERMENT"
+    },
+    {
+      "from": "tags",
+      "fromAnchor": "top",
+      "to": "community",
+      "toAnchor": "bottom",
+      "label": "COMMUNITY ACTION"
+    },
+    {
+      "from": "tags",
+      "fromAnchor": "top",
+      "to": "climate",
+      "toAnchor": "bottom",
+      "label": "ECOLOGICAL PRESERVATION"
     },
     {
       "from": "state_reg",
-      "to": "climate",
-      "label": "Controls and Regulates "
+      "fromAnchor": "bottom",
+      "to": "edu_hub",
+      "toAnchor": "top",
+      "label": "OVERSEE, SUBSIDISE, REGULATE"
     },
     {
       "from": "edu_hub",
+      "fromAnchor": "right",
       "to": "climate",
-      "label": "Opportunity creation and access"
-    },
-    {
-      "from": "community",
-      "to": "climate",
-      "label": "Inclusion"
+      "toAnchor": "left",
+      "label": "OPPORTUNITY CREATION & ACCESS"
     },
     {
       "from": "climate",
+      "fromAnchor": "right",
       "to": "income",
-      "label": "Yields"
+      "toAnchor": "left",
+      "label": "YIELDS"
     },
     {
       "from": "climate",
+      "fromAnchor": "right",
       "to": "ventures",
-      "label": "Spin-Offs"
+      "toAnchor": "left",
+      "label": "SPIN-OFFS"
+    },
+    {
+      "from": "climate",
+      "fromAnchor": "bottom",
+      "to": "hume",
+      "toAnchor": "top",
+      "label": ""
+    },
+    {
+      "from": "ventures",
+      "fromAnchor": "bottom",
+      "to": "greenworms",
+      "toAnchor": "top",
+      "label": ""
     },
     {
       "from": "state_reg",
-      "to": "edu_hub",
-      "label": "oversee, subsidise, regulate"
-    },
-    {
-      "from": "node_1780911184569",
-      "to": "edu_hub",
-      "label": "Skill building"
-    },
-    {
-      "from": "node_1780911351535",
-      "to": "edu_hub",
-      "label": "tech literacy"
-    },
-    {
-      "from": "node_1780911351535",
-      "to": "community",
-      "label": "empowerment, dialogue creation"
-    },
-    {
-      "from": "community",
-      "to": "node_1780911725257",
-      "label": "Social entreprenurship"
-    },
-    {
-      "from": "community",
-      "to": "node_1780911745519",
-      "label": "Community epowerment"
-    },
-    {
-      "from": "community",
-      "to": "node_1780912675866",
-      "label": "Media & narratives"
+      "fromAnchor": "right",
+      "to": "climate",
+      "toAnchor": "left",
+      "label": "CONTROLS AND REGULATES"
     },
     {
       "from": "climate",
-      "to": "node_1780911745519",
-      "label": "Ecological preservation"
-    },
-    {
-      "from": "node_1780913142285",
+      "fromAnchor": "left",
       "to": "community",
-      "label": "Community action"
-    },
-    {
-      "from": "node_1780913142285",
-      "to": "climate",
-      "label": "Ecological preservation"
+      "toAnchor": "right",
+      "label": "INCLUSION"
     }
   ],
-  "lineStyle": "smooth"
+  "floatingLabels": [
+    {
+      "id": "float_1790832806530",
+      "text": "SOCIAL ENTREPRENEURSHIP",
+      "x": 1740,
+      "y": 585
+    }
+  ]
 }

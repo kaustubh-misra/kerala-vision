@@ -966,9 +966,12 @@ document.addEventListener('dblclick', (e) => {
       const jsonStr = JSON.stringify(mapData, null, 2);
       const blob = new Blob([jsonStr], { type: 'application/json' });
       const a = document.createElement('a');
-      a.href = URL.click ? URL.createObjectURL(blob) : '';
+      a.href = URL.createObjectURL(blob);
       a.download = 'data.json';
+      document.body.appendChild(a);
       a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
     }
   </script>
 </body>
