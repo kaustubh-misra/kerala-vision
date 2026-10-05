@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Economy — Project: Kerala Vision</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css?v=2">
+
+  <style>
+    .kv-placeholder {
+      width: 100%;
+      padding: 4rem 3rem;
+    }
+
+    .kv-placeholder-inner {
+      max-width: 36rem;
+    }
+
+    .kv-eyebrow {
+      font-family: var(--font-spec);
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      margin: 0 0 1.25rem;
+    }
+
+    .kv-placeholder-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.75rem, 8vw, 5rem);
+      line-height: 0.95;
+      color: var(--color-burgundy);
+      margin: 0 0 1.5rem;
+    }
+
+    .kv-rule {
+      width: 4rem;
+      height: 2px;
+      background: var(--color-gold);
+      margin: 0 0 2rem;
+    }
+
+    .kv-placeholder-body {
+      font-family: var(--font-book);
+      font-style: italic;
+      font-size: 1.15rem;
+      line-height: 1.6;
+      color: var(--color-sepia);
+    }
+
+    @media (max-width: 639px) {
+      .kv-placeholder {
+        padding: 3rem 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body data-page="economy">
+
+  <div id="kv-deck" class="kv-deck-top">
+    <section class="kv-placeholder">
+      <div class="kv-placeholder-inner">
+        <p class="kv-eyebrow">Project: Kerala Vision</p>
+        <h1 class="kv-placeholder-title">Economy</h1>
+        <div class="kv-rule"></div>
+      </div>
+    </section>
+
+    <section class="kv-article">
+      <div class="kv-article-inner">
+        <div class="kv-article-body">
+          <p>The economy of Kerala is heavily services driven, with the service sector making up more than 60% of the Gross State Value Added<sup class="kv-fnref"><a href="#fn1" id="fnref1">1</a></sup>. The industry sector is dominated primarily by traditional industries such as Coir, Bamboo, and handlooms, and agriculture in Kerala depends on cash crops like rubber, coconut, coffee, and tea. The state depends heavily on remittances from migrants abroad to drive household consumption, and the Malayali diaspora contributes roughly 20% to India&#x27;s total foreign remittances<sup class="kv-fnref"><a href="#fn2" id="fnref2">2</a></sup>.</p>
+
+          <figure class="kv-chart kv-chart--wide">
+            <button type="button" class="kv-chart-download" data-chart="gsdp" aria-label="Download chart data as CSV" title="Download CSV"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></button>
+            <div class="kv-chart-header">
+              <h3>State-wise GSDP Growth Rate: 10-Year Average</h3>
+              <p>Kerala&rsquo;s average Gross State Domestic Product growth rate compared against all Indian states and union territories.</p>
+            </div>
+            <div class="kv-chart-canvas-wrap" style="height: 520px;">
+              <canvas id="kv-gsdp-chart"></canvas>
+            </div>
+          </figure>
+
+          <p>Kerala is looming on the brink of an economic crisis with multiple issues plaguing the public finances. The government of Kerala is pushed into a debt trap as it relies on borrowing money to finance salaries and pensions. The state spends more money on servicing debt than on developmental projects. The dependency on foreign remittances makes Kerala more vulnerable to geopolitical shocks, especially because 80% of Kerala&rsquo;s emigrants are concentrated in the Gulf countries<sup class="kv-fnref"><a href="#fn3" id="fnref3">3</a></sup>. Geopolitical tensions, oil shocks, and policy changes threaten the income and visas of the Indian diaspora in these countries and can impact the financial standing of multiple households back home.</p>
+
+          <figure class="kv-chart">
+            <button type="button" class="kv-chart-download" data-chart="finances" aria-label="Download chart data as CSV" title="Download CSV"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></button>
+            <div class="kv-chart-header">
+              <h3>20 Years of Kerala&rsquo;s Public Finances</h3>
+              <p>Revenue Expenditure, Fiscal Deficit, Committed Outgo, and Capital Expenditure as a share of GSDP, 2004&ndash;2026.</p>
+            </div>
+            <div class="kv-chart-canvas-wrap">
+              <canvas id="kv-finances-chart"></canvas>
+            </div>
+          </figure>
+
+          <p>Kerala does not have geography conducive to set up large industries, due to its highly dense population and more than 60% of its land area is covered by forests or ecologically sensitive zones<sup class="kv-fnref"><a href="#fn4" id="fnref4">4</a></sup>. There is very little land available for large industrial parks, and land acquisition is difficult. The state also lacks proximity and access to major industrial resources like iron ore and coal. Additionally, Kerala chose to adopt a human centric model of development rather than one that is focused on capital and industry. The lack of industrial infrastructure also limits the diversity of job opportunities which affects the levels of educated unemployment in the state. Despite having one of the highest literacy rates in the country, Kerala is unable to absorb the highly educated into the workforce. According to the <a href="https://www.mospi.gov.in/sites/default/files/publication_reports/AnnualReport_PLFS2023-24L2.pdf" target="_blank" rel="noopener">Periodic Labour Force Survey (PLFS)</a> for the period of July 2023 to June 2024, the youth unemployment rate in Kerala for those aged 15 to 29 stands at almost 30%, which is thrice more than the national average of 10.2%. The reason for these rising levels of educated unemployment in Kerala is mainly due to a mismatch in career aspirations of the youth and the reality of the job market. The limited industrial base restricts the availability of local jobs, and while the service and tourism sector offer employment these opportunities are often seasonal and informal in nature. Therefore with very few &lsquo;suitable&rsquo; jobs available, educated young people remain unemployed, underemployed, or migrate in search of better prospects.</p>
+
+          <p>Kerala had one of the highest migration rates amongst all Indian states in 2021. According to the Kerala Migration Survey of 2023, the number of emigrants from Kerala is estimated to be 2.2 million, closely aligning with the 2.1 million recorded in the KMS 2018. Despite expectations of a further decline in this round of KMS, a significant rise in student emigration has substantially contributed to maintaining the emigration levels in 2023. From 129,763 student emigrants in 2018, the number has doubled to about 250,000 in 2023.</p>
+
+          <p>It is mainly the youth demographic that chooses to migrate in search of better job opportunities, leaving behind an older population and skewing the dependency ratio of the state. Historically, the Gulf region was the dominant destination for semi-skilled or skilled workers. However, in the past decade there has been a shift toward education led migration to the Global North. The key implication here is that those that would migrate to the gulf countries intended to return after a few decades. However, students that migrate to countries like Canada, Australia, and the UK seek permanent residency there. Consequently, due to this brain drain there are certain households in Kerala where entire families have migrated, contributing to an increasing aging population and a reducing labour force that can contribute to the economy.</p>
+        </div>
+
+        <div class="kv-endnotes">
+          <h2 class="kv-endnotes-heading">Endnotes</h2>
+          <ol>
+            <li id="fn1">Kerala State Planning Board. &ldquo;<a href="https://spb.kerala.gov.in/sites/default/files/2021-01/English-Vol-1_0.pdf" target="_blank" rel="noopener">Economic Review 2020</a>&rdquo;. State Planning Board, Thiruvananthapuram, Kerala, India. January 2021<a href="#fnref1" class="kv-back">&#8617;</a></li>
+            <li id="fn2">Reserve Bank of India. &ldquo;<a href="https://rbi.org.in/scripts/BS_ViewBulletin.aspx?Id=23260" target="_blank" rel="noopener">Changing Dynamics of India&#x27;s Remittances &ndash; Insights from the Inward Remittances Survey.</a>&rdquo; RBI Bulletin (March 2025) / RBI Bulletin (November 2018)<a href="#fnref2" class="kv-back">&#8617;</a></li>
+            <li id="fn3">Rajan, S. Irudaya. &ldquo;<a href="https://iimad.org/wp-content/uploads/2024/06/KMS-2023-Report.pdf" target="_blank" rel="noopener">Kerala Migration Survey 2023</a>&rdquo;. Thiruvananthapuram: International Institute of Migration and Development (IIMAD), 2024.<a href="#fnref3" class="kv-back">&#8617;</a></li>
+            <li id="fn4">Kerala Forest Department. &ldquo;<a href="https://forest.kerala.gov.in/forestapp/public/documents/publications/file0211202408:51:58.pdf" target="_blank" rel="noopener">Kerala Forest Statistics</a>&rdquo;. Thiruvananthapuram: Government of Kerala, 2021.<a href="#fnref4" class="kv-back">&#8617;</a></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="nav.js?v=2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    (function () {
+      const bodyFont = "'EB Garamond', Garamond, Georgia, serif";
+
+      const gsdpData = [
+        { state: "Andhra Pradesh", rate: 6.70 },
+        { state: "Arunachal Pradesh", rate: 5.11 },
+        { state: "Assam", rate: 6.96 },
+        { state: "Bihar", rate: 5.50 },
+        { state: "Chhattisgarh", rate: 6.19 },
+        { state: "Goa", rate: 2.92 },
+        { state: "Gujarat", rate: 8.27 },
+        { state: "Haryana", rate: 6.65 },
+        { state: "Himachal Pradesh", rate: 5.84 },
+        { state: "Jammu and Kashmir", rate: 5.02 },
+        { state: "Jharkhand", rate: 5.45 },
+        { state: "Karnataka", rate: 7.44 },
+        { state: "Kerala", rate: 4.86 },
+        { state: "Madhya Pradesh", rate: 6.43 },
+        { state: "Maharashtra", rate: 5.54 },
+        { state: "Manipur", rate: 5.21 },
+        { state: "Meghalaya", rate: 3.08 },
+        { state: "Mizoram", rate: 10.00 },
+        { state: "Nagaland", rate: 4.76 },
+        { state: "Odisha", rate: 7.13 },
+        { state: "Punjab", rate: 5.33 },
+        { state: "Rajasthan", rate: 5.73 },
+        { state: "Sikkim", rate: 6.97 },
+        { state: "Tamil Nadu", rate: 6.37 },
+        { state: "Telangana", rate: 6.92 },
+        { state: "Tripura", rate: 7.79 },
+        { state: "Uttar Pradesh", rate: 5.88 },
+        { state: "Uttarakhand", rate: 5.44 },
+        { state: "West Bengal", rate: 4.55 },
+        { state: "Andaman and Nicobar Islands", rate: 6.22 },
+        { state: "Chandigarh", rate: 5.65 },
+        { state: "Delhi", rate: 5.87 },
+        { state: "Puducherry", rate: 4.16 }
+      ];
+
+      const labels = gsdpData.map(d => d.state);
+      const data = gsdpData.map(d => d.rate);
+      const colors = gsdpData.map(d => d.state === 'Kerala' ? '#9c2b22' : '#b8872f');
+
+      new Chart(document.getElementById('kv-gsdp-chart'), {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: '10Y GSDP Growth Rate (%)',
+              data: data,
+              backgroundColor: colors,
+              borderRadius: 3
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: 'rgba(58, 32, 22, 0.92)',
+              padding: 10,
+              titleFont: { family: bodyFont, size: 13 },
+              bodyFont: { family: bodyFont, size: 12 },
+              callbacks: {
+                label: (context) => ` 10Y GSDP Growth Rate: ${context.parsed.y}%`
+              }
+            }
+          },
+          scales: {
+            x: {
+              ticks: {
+                color: '#5c3a28',
+                font: { family: bodyFont, size: 11 },
+                autoSkip: false,
+                maxRotation: 65,
+                minRotation: 65
+              },
+              grid: { display: false }
+            },
+            y: {
+              beginAtZero: true,
+              title: { display: true, text: '10Y GSDP Growth Rate (%)', color: '#3a2016', font: { family: bodyFont, size: 13, weight: '600' } },
+              ticks: { color: '#5c3a28', font: { family: bodyFont, size: 12 } },
+              grid: { color: 'rgba(58, 32, 22, 0.1)' }
+            }
+          },
+          layout: {
+            padding: { bottom: 8 }
+          }
+        }
+      });
+
+      const keralaPublicFinanceData = [
+        { year: "2004-2005", gsdp: 119264, re: 17169, rePct: 14.4, fd: 4452, fdPct: 3.7, co: 682, coPct: 0.6, otherCapex: 2424, capex: 3106, capexPct: 2.6 },
+        { year: "2005-2006", gsdp: 136841.76, re: 18424, rePct: 13.5, fd: 4182, fdPct: 3.1, co: 817, coPct: 0.6, otherCapex: 1874, capex: 2691, capexPct: 2.0 },
+        { year: "2006-2007", gsdp: 153784.88, re: 20825, rePct: 13.5, fd: 3822, fdPct: 2.5, co: 903, coPct: 0.6, otherCapex: 1432, capex: 2335, capexPct: 1.5 },
+        { year: "2007-2008", gsdp: 175141.08, re: 24892, rePct: 14.2, fd: 6100, fdPct: 3.5, co: 1475, coPct: 0.8, otherCapex: 2326, capex: 3801, capexPct: 2.2 },
+        { year: "2008-2009", gsdp: 202782.79, re: 28224, rePct: 13.9, fd: 6346, fdPct: 3.1, co: 1696, coPct: 0.8, otherCapex: 2634, capex: 4330, capexPct: 2.1 },
+        { year: "2009-2010", gsdp: 231998.67, re: 31132, rePct: 13.4, fd: 7872, fdPct: 3.4, co: 2059, coPct: 0.9, otherCapex: 2642, capex: 4701, capexPct: 2.0 },
+        { year: "2010-2011", gsdp: 263773.3, re: 34665, rePct: 13.1, fd: 7730, fdPct: 2.9, co: 3364, coPct: 1.3, otherCapex: 2736, capex: 6100, capexPct: 2.3 },
+        { year: "2011-2012", gsdp: 364047.88, re: 46044.62, rePct: 12.6, fd: 12814.77, fdPct: 3.5, co: 3852.92, coPct: 1.1, otherCapex: 3892, capex: 7745, capexPct: 2.1 },
+        { year: "2012-2013", gsdp: 412313, re: 53489, rePct: 13.0, fd: 15002, fdPct: 3.6, co: 4603, coPct: 1.1, otherCapex: 3941, capex: 8544, capexPct: 2.1 },
+        { year: "2013-2014", gsdp: 465041.21, re: 60486, rePct: 13.0, fd: 16944, fdPct: 3.6, co: 4294, coPct: 0.9, otherCapex: 4590, capex: 8884, capexPct: 1.9 },
+        { year: "2014-2015", gsdp: 512564.05, re: 71746.43, rePct: 14.0, fd: 18641.73, fdPct: 3.6, co: 4254.59, coPct: 0.8, otherCapex: 3934, capex: 8189, capexPct: 1.6 },
+        { year: "2015-2016", gsdp: 561993.61, re: 78689, rePct: 14.0, fd: 17818, fdPct: 3.2, co: 7500, coPct: 1.3, otherCapex: 4917, capex: 12417, capexPct: 2.2 },
+        { year: "2016-2017", gsdp: 634886, re: 91096, rePct: 14.3, fd: 26448, fdPct: 4.2, co: 10126, coPct: 1.6, otherCapex: 5935, capex: 16061, capexPct: 2.5 },
+        { year: "2017-2018", gsdp: 701588.26, re: 99948, rePct: 14.2, fd: 26837, fdPct: 3.8, co: 8749, coPct: 1.2, otherCapex: 8337, capex: 17086, capexPct: 2.4 },
+        { year: "2018-2019", gsdp: 788285.58, re: 110316, rePct: 14.0, fd: 26958, fdPct: 3.4, co: 7431, coPct: 0.9, otherCapex: 10820, capex: 18251, capexPct: 2.3 },
+        { year: "2019-2020", gsdp: 812934.63, re: 104720, rePct: 12.9, fd: 23838, fdPct: 2.9, co: 8455, coPct: 1.0, otherCapex: 9996, capex: 18451, capexPct: 2.3 },
+        { year: "2020-2021", gsdp: 771723.89, re: 123446, rePct: 16.0, fd: 40970, fdPct: 5.3, co: 12890, coPct: 1.7, otherCapex: 11723, capex: 24613, capexPct: 3.2 },
+        { year: "2021-2022", gsdp: 924465.42, re: 146180, rePct: 15.8, fd: 46046, fdPct: 5.0, co: 14192, coPct: 1.5, otherCapex: 15880, capex: 30072, capexPct: 3.3 },
+        { year: "2022-2023", gsdp: 1023602.46, re: 141951, rePct: 13.9, fd: 25555, fdPct: 2.5, co: 13997, coPct: 1.4, otherCapex: null, capex: null, capexPct: null },
+        { year: "2023-2024", gsdp: 1146108.67, re: 142626, rePct: 12.4, fd: 34258, fdPct: 3.0, co: 13584, coPct: 1.2, otherCapex: null, capex: null, capexPct: null },
+        { year: "2024-2025", gsdp: 1275412, re: 162126, rePct: 12.7, fd: 44747, fdPct: 3.5, co: 14070, coPct: 1.1, otherCapex: null, capex: null, capexPct: null },
+        { year: "2025-2026", gsdp: 1427145, re: 179476, rePct: 12.6, fd: 45039, fdPct: 3.2, co: 16938, coPct: 1.2, otherCapex: null, capex: null, capexPct: null }
+      ];
+
+      const years = keralaPublicFinanceData.map(d => d.year);
+      const rePct = keralaPublicFinanceData.map(d => d.rePct);
+      const fdPct = keralaPublicFinanceData.map(d => d.fdPct);
+      const coPct = keralaPublicFinanceData.map(d => d.coPct);
+      const capexPct = keralaPublicFinanceData.map(d => d.capexPct);
+
+      new Chart(document.getElementById('kv-finances-chart'), {
+        type: 'line',
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: 'RE as % of GSDP',
+              data: rePct,
+              borderColor: '#4285F4',
+              backgroundColor: '#4285F4',
+              borderWidth: 2.5,
+              pointRadius: 2,
+              tension: 0.1
+            },
+            {
+              label: 'FD as % of GSDP',
+              data: fdPct,
+              borderColor: '#EA4335',
+              backgroundColor: '#EA4335',
+              borderWidth: 2.5,
+              pointRadius: 2,
+              tension: 0.1
+            },
+            {
+              label: 'CO as % of GSDP',
+              data: coPct,
+              borderColor: '#b8872f',
+              backgroundColor: '#b8872f',
+              borderWidth: 2.5,
+              pointRadius: 2,
+              tension: 0.1
+            },
+            {
+              label: 'Capex as % of GSDP',
+              data: capexPct,
+              borderColor: '#34A853',
+              backgroundColor: '#34A853',
+              borderWidth: 2.5,
+              pointRadius: 2,
+              spanGaps: false,
+              tension: 0.1
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                usePointStyle: true,
+                boxWidth: 10,
+                color: '#3a2016',
+                font: { family: bodyFont, size: 12 }
+              }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(58, 32, 22, 0.92)',
+              padding: 12,
+              titleFont: { family: bodyFont, size: 13 },
+              bodyFont: { family: bodyFont, size: 12 },
+              callbacks: {
+                title: (items) => `Fiscal Year: ${items[0].label}`,
+                label: function (context) {
+                  const pctValue = context.raw !== null ? context.raw + '%' : 'N/A';
+                  return ` ${context.dataset.label}: ${pctValue}`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: {
+                maxRotation: 45,
+                minRotation: 45,
+                color: '#5c3a28',
+                font: { family: bodyFont, size: 10 }
+              }
+            },
+            y: {
+              min: 0.0,
+              max: 20.0,
+              ticks: {
+                stepSize: 5.0,
+                color: '#5c3a28',
+                font: { family: bodyFont, size: 12 },
+                callback: (val) => val.toFixed(1)
+              },
+              grid: { color: 'rgba(58, 32, 22, 0.1)' },
+              title: {
+                display: true,
+                text: '% of GSDP',
+                color: '#3a2016',
+                font: { family: bodyFont, size: 13, weight: '600' }
+              }
+            }
+          }
+        }
+      });
+
+      function toCSV(headers, rows) {
+        const esc = (v) => {
+          const s = String(v);
+          return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+        };
+        return [headers, ...rows].map((r) => r.map(esc).join(',')).join('\n');
+      }
+
+      function downloadCSV(filename, headers, rows) {
+        const blob = new Blob([toCSV(headers, rows)], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+
+      const gsdpBtn = document.querySelector('.kv-chart-download[data-chart="gsdp"]');
+      if (gsdpBtn) {
+        gsdpBtn.addEventListener('click', () => downloadCSV(
+          'indian-states-gsdp-growth-rate-10y.csv',
+          ['State/UT', '10Y GSDP Growth Rate (%)'],
+          gsdpData.map(d => [d.state, d.rate])
+        ));
+      }
+
+      const financesBtn = document.querySelector('.kv-chart-download[data-chart="finances"]');
+      if (financesBtn) {
+        financesBtn.addEventListener('click', () => downloadCSV(
+          'kerala-public-finances-20y.csv',
+          ['Year', 'RE as % of GSDP', 'FD as % of GSDP', 'CO as % of GSDP', 'Capex as % of GSDP'],
+          keralaPublicFinanceData.map(d => [d.year, d.rePct, d.fdPct, d.coPct, d.capexPct])
+        ));
+      }
+    })();
+  </script>
+</body>
+</html>

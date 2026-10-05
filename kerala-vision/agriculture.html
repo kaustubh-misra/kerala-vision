@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agriculture — Project: Kerala Vision</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css?v=2">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <style>
+    .kv-placeholder {
+      width: 100%;
+      padding: 4rem 3rem;
+    }
+
+    .kv-placeholder-inner {
+      max-width: 36rem;
+    }
+
+    .kv-eyebrow {
+      font-family: var(--font-spec);
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      margin: 0 0 1.25rem;
+    }
+
+    .kv-placeholder-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.75rem, 8vw, 5rem);
+      line-height: 0.95;
+      color: var(--color-burgundy);
+      margin: 0 0 1.5rem;
+    }
+
+    .kv-rule {
+      width: 4rem;
+      height: 2px;
+      background: var(--color-gold);
+      margin: 0 0 2rem;
+    }
+
+    .kv-placeholder-body {
+      font-family: var(--font-book);
+      font-style: italic;
+      font-size: 1.15rem;
+      line-height: 1.6;
+      color: var(--color-sepia);
+    }
+
+    @media (max-width: 639px) {
+      .kv-placeholder {
+        padding: 3rem 1.6rem;
+      }
+    }
+
+    .kv-map-wrap {
+      position: relative;
+      width: 100%;
+      height: 600px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    #kv-agri-map {
+      width: 100%;
+      height: 100%;
+    }
+
+    #kv-agri-map .info {
+      padding: 10px 14px;
+      font-family: var(--font-book);
+      font-size: 14px;
+      line-height: 1.4;
+      background: rgba(243, 233, 214, 0.95);
+      box-shadow: 0 0 15px rgba(58, 32, 22, 0.2);
+      border-radius: 6px;
+      color: var(--color-ink);
+    }
+
+    #kv-agri-map .info h4 {
+      margin: 0 0 5px;
+      font-family: var(--font-book);
+      font-weight: 600;
+      color: var(--color-burgundy);
+    }
+
+    #kv-agri-map .legend {
+      line-height: 20px;
+      font-family: var(--font-book);
+      color: var(--color-ink-soft);
+    }
+
+    #kv-agri-map .legend i {
+      width: 18px;
+      height: 18px;
+      float: left;
+      margin-right: 8px;
+      opacity: 0.85;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body data-page="agriculture">
+
+  <div id="kv-deck" class="kv-deck-top">
+    <section class="kv-placeholder">
+      <div class="kv-placeholder-inner">
+        <p class="kv-eyebrow">Project: Kerala Vision</p>
+        <h1 class="kv-placeholder-title">Agriculture</h1>
+        <div class="kv-rule"></div>
+      </div>
+    </section>
+
+    <section class="kv-article">
+      <div class="kv-article-inner">
+        <div class="kv-article-body">
+          <h3 class="kv-section-heading">Agriculture in Kerala: An overview</h3>
+
+          <p>Agriculture remains a major pillar for Kerala&rsquo;s social and economic fabric. Kerala agriculture is largely a mix of homestead farming, high-value plantation crops, and small- and medium-scale landholding agriculture<sup class="kv-fnref"><a href="#fn1" id="fnref1">1</a></sup>. The sector is increasingly unable to cope with climate-induced stress, including rising temperatures. Kerala&rsquo;s agricultural sector, which has historically served as the fundamental edifice of the state&rsquo;s socio-economic and cultural landscape, is currently navigating a period of profound systemic crisis<sup class="kv-fnref"><a href="#fn2" id="fnref2">2</a></sup>. An academic literature indicates that climate vulnerability needs to be identified at the regional level to inform agricultural, crop, and plantation policies.</p>
+
+          <p>The major threat from climate change in the agricultural sector is the erratic monsoon and weather patterns, which pose a significant threat to agricultural practices in Kerala. The possibility of threats to water availability, including drought and flooding, can also be a major concern. This crisis is multifaceted, on the one hand confronting environmental volatility created by climate change and, on the other, the deep social and economic shifts the state is undergoing. To effectively restore the state&#x27;s agricultural sovereignty and long-term viability, the administration must acknowledge and address the widening decoupling of Kerala&rsquo;s economic growth from its primary production<sup class="kv-fnref"><a href="#fn3" id="fnref3">3</a></sup>. It is imperative to confront the climate-induced stressors that are actively threatening the agricultural ecosystems upon which the state depends.</p>
+
+          <p>The structural shift in Kerala&rsquo;s Gross State Domestic Product (GSDP) reflects a decisive move toward a service-oriented economy. This has happened at the direct expense of agricultural self- sufficiency. Data indicates that the share of agriculture toward the domestic product has fallen drastically from approximately 40% in 1980 to roughly 9% in recent years<sup class="kv-fnref"><a href="#fn4" id="fnref4">4</a></sup>. This agricultural marginalisation has increased the state&rsquo;s reliance on food imports and eroded the rural economy&rsquo;s inherent resilience. Simultaneously, the state&rsquo;s ecological foundations are under unprecedented pressure, with a recorded mean annual temperature rise of 0.44&deg;C<sup class="kv-fnref"><a href="#fn5" id="fnref5">5</a></sup>. This is not merely a statistical trend. This could threaten the Western Ghats, which have traditionally served as a vital carbon-sequestering canopy for the region<sup class="kv-fnref"><a href="#fn6" id="fnref6">6</a></sup>.</p>
+
+          <figure class="kv-chart">
+            <button type="button" class="kv-chart-download" data-chart="agri-vulnerability" aria-label="Download chart data as CSV" title="Download CSV"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></button>
+            <div class="kv-chart-header">
+              <h3>Kerala Agriculture Vulnerability Index</h3>
+              <p>Hover over a district to view its vulnerability score and risk category</p>
+            </div>
+            <div class="kv-map-wrap">
+              <div id="kv-agri-map"></div>
+            </div>
+          </figure>
+
+          <h3 class="kv-section-heading">Understanding the current policy landscape</h3>
+
+          <p>There has been emphasis upon the need for a more climate-specific and region-end approach in Kerala&rsquo;s agriculture policy. This is evident from the Department of Agriculture, Government of Kerala, which is currently adopting an Agro-Ecological Units-based planning approach<sup class="kv-fnref"><a href="#fn7" id="fnref7">7</a></sup>. At present, Kerala is divided into 23 Agro-Ecological Units. Based on the soil temperature and other relevant geographic and climatic factors, crop selection and seed distribution are being maintained at the Agro-Ecological Units.</p>
+
+          <p>We can also consider that Kerala has initiated mechanisms to improve the value chain in the agriculture sector. <a href="https://kera.kerala.gov.in/" target="_blank" rel="noopener">The Kerala Climate Resilient Agri-Value Chain Modernisation (KERA)</a> initiative, funded by the World Bank, is an important collaborative project that Kerala has undertaken. This initiative is supposed to help small-scale farmers with digital tools and infrastructure to adopt climate practices, improve production, and address any knowledge gaps.</p>
+
+          <p>Kerala&rsquo;s agricultural sector is constrained by systemic policy gaps spanning land tenure, workforce retention, ecological management, and climate adaptation. Structurally, the absence of a progressive tenancy frameworks leaves 20% to 35% of cultivable land fallow under absentee landowners, while actual cultivators, disproportionately women and smallholders, are denied legal rights to access and utilize this land<sup class="kv-fnref"><a href="#fn8" id="fnref8">8</a></sup>. This insecurity of tenure is exacerbated by a broader labor policy deficit, where limited agrarian economic viability drives workforce attrition and out-migration among the employable-age population<sup class="kv-fnref"><a href="#fn9" id="fnref9">9</a></sup> Concurrently, agricultural extension and land-use governance have failed to curb severe soil degradation stemming from decades of chemical overuse and deviations from ecosystem-based practices<sup class="kv-fnref"><a href="#fn10" id="fnref10">10</a></sup>. Finally, state agricultural policy lacks dedicated, microclimate-specific adaptation strategies to cushion heat-sensitive, high-value plantation crops from rising temperatures, leaving the sector acute to climate-induced shocks<sup class="kv-fnref"><a href="#fn11" id="fnref11">11</a></sup>.</p>
+        </div>
+
+        <div class="kv-endnotes">
+          <h2 class="kv-endnotes-heading">Endnotes</h2>
+          <ol>
+            <li id="fn1">P. D. Jeromi, &ldquo;<a href="https://drive.google.com/file/d/1tb8A6EpWVUOeD8rzRmZTWO1r-3d94XOj/view?usp=sharing" target="_blank" rel="noopener">What Ails Kerala&rsquo;s Agriculture? A Sectoral Analysis</a>,&rdquo; Economic and Political Weekly 42, no. 16 (2007): 1484&ndash;92.<a href="#fnref1" class="kv-back">&#8617;</a></li>
+            <li id="fn2">Directorate of Environment and Climate Change (DoECC), <a href="https://climatechange.envt.kerala.gov.in/wp-content/uploads/2024/05/Kerala-State-Action-Plan-on-Climate-Change-2.0.pdf" target="_blank" rel="noopener">Kerala State Action Plan on Climate Change 2.0 (2023&ndash;2030)</a> (Thiruvananthapuram: Department of Environment, Government of Kerala, 2022).<a href="#fnref2" class="kv-back">&#8617;</a></li>
+            <li id="fn3">Ansari, S., Prasad, D., &amp; Rajeshwari, C., &lsquo;<a href="https://drive.google.com/file/d/18dzfcTLPH01Yo02v6Z2R0Af96cRJO7jL/view?usp=sharing" target="_blank" rel="noopener">Kerala Vision Document</a>&rsquo;, Centre for Governance, Indian Institute of Management, Kozhikode, 2026.<a href="#fnref3" class="kv-back">&#8617;</a></li>
+            <li id="fn4">State Planning Board. 2024. Economic Review 2023. Thiruvananthapuram: Government of Kerala. <a href="https://spb.kerala.gov.in/economic-review/ER2023/" target="_blank" rel="noopener">https://spb.kerala.gov.in/economic-review/ER2023/</a>.<a href="#fnref4" class="kv-back">&#8617;</a></li>
+            <li id="fn5">Directorate of Environment and Climate Change (DoECC), <a href="https://climatechange.envt.kerala.gov.in/wp-content/uploads/2024/05/Kerala-State-Action-Plan-on-Climate-Change-2.0.pdf" target="_blank" rel="noopener">Kerala State Action Plan on Climate Change 2.0 (2023&ndash;2030)</a> (Thiruvananthapuram: Department of Environment, Government of Kerala, 2022).<a href="#fnref5" class="kv-back">&#8617;</a></li>
+            <li id="fn6">Gadgil, Madhav, Krishnanothal V. Subash, B. J. Krishnan, V. S. Vijayan, K. P. Thrivikramji, and Ligia Noronha. 2011. <a href="https://moef.gov.in/wp-content/uploads/2017/09/WGEEP-Vol-1.pdf." target="_blank" rel="noopener">Report of the Western Ghats Ecology Expert Panel (WGEEP)</a>. New Delhi: Ministry of Environment and Forests, Government of India.<a href="#fnref6" class="kv-back">&#8617;</a></li>
+            <li id="fn7">Ansari, S., Prasad, D., &amp; Rajeshwari, C., &lsquo;<a href="https://drive.google.com/file/d/18dzfcTLPH01Yo02v6Z2R0Af96cRJO7jL/view?usp=sharing" target="_blank" rel="noopener">Kerala Vision Document</a>&rsquo;, Centre for Governance, Indian Institute of Management, Kozhikode, 2026.<a href="#fnref7" class="kv-back">&#8617;</a></li>
+            <li id="fn8">Centre for Public Policy Research (CPPR), <a href="https://www.cppr.in/wp-content/uploads/2026/02/Working-Paper_Land-Leasing-under-the-KLR-Act_Final.pdf" target="_blank" rel="noopener">Rethinking Leasing Restrictions under the Kerala Land Reforms Framework</a>, CPPR Working Paper (Kochi: Centre for Public Policy Research, 2026).<a href="#fnref8" class="kv-back">&#8617;</a></li>
+            <li id="fn9">S. Irudaya Rajan and K. C. Zachariah, <a href="https://journals.sagepub.com/doi/abs/10.1177/21632324241306512" target="_blank" rel="noopener">Emigration and Remittances: New Evidences from the Kerala Migration Survey 2018</a>, CDS Working Paper No. 483 (Thiruvananthapuram: Centre for Development Studies, 2019).<a href="#fnref9" class="kv-back">&#8617;</a></li>
+            <li id="fn10">State Planning Board, <a href="https://spb.kerala.gov.in/sites/default/files/inline-files/14th%20Five%20Year%20Plan%2022-27%20English.pdf" target="_blank" rel="noopener">Report of the Working Group on Agriculture and Allied Sectors: Fourteenth Five-Year Plan (2022&ndash;2027)</a> (Thiruvananthapuram: Government of Kerala, 2022).<a href="#fnref10" class="kv-back">&#8617;</a></li>
+            <li id="fn11">L. Murugan, M. Alagupalam, and K. A. Sreeja, &ldquo;<a href="https://www.frontiersin.org/journals/sustainable-food-systems/articles/10.3389/fsufs.2022.728651/full" target="_blank" rel="noopener">Understanding the Effects of Cardamom Cultivation and Microclimatic Changes on Plantation Agriculture in the Indian Cardamom Hills</a>,&rdquo; Frontiers in Sustainable Food Systems 6 (2022): 728651.<a href="#fnref11" class="kv-back">&#8617;</a></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="nav.js?v=2"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      const csvData = `District,Vulnerability_Index,Category
+Palakkad,0.666,High
+Wayanad,0.648,High
+Kasaragod,0.628,High
+Idukki,0.620,High
+Kozhikode,0.607,High
+Malappuram,0.598,High
+Kottayam,0.528,High
+Kannur,0.525,High
+Thiruvananthapuram,0.521,High
+Pathanamthitta,0.511,Medium
+Kollam,0.454,Medium
+Thrissur,0.409,Medium
+Ernakulam,0.331,Low
+Alappuzha,0.229,Low`;
+
+      const vulnerabilityData = {};
+      csvData.trim().split('\n').slice(1).forEach(row => {
+        const [district, index, category] = row.split(',');
+        vulnerabilityData[district.trim().toLowerCase()] = {
+          score: parseFloat(index),
+          category: category.trim()
+        };
+      });
+
+      const agriDownloadBtn = document.querySelector('.kv-chart-download[data-chart="agri-vulnerability"]');
+      if (agriDownloadBtn) {
+        agriDownloadBtn.addEventListener('click', () => {
+          const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'kerala-agriculture-vulnerability-index.csv';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        });
+      }
+
+      const map = L.map('kv-agri-map').setView([10.5, 76.2], 7);
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+        maxZoom: 18
+      }).addTo(map);
+
+      function getColor(score) {
+        return score > 0.60 ? '#99000d' :
+               score > 0.52 ? '#ef3b2c' :
+               score > 0.45 ? '#fc9272' :
+               score > 0.35 ? '#fee0d2' :
+                              '#e5f5e0';
+      }
+
+      function style(feature) {
+        const distName = (feature.properties.DISTRICT || feature.properties.district || '').toLowerCase();
+        const info = vulnerabilityData[distName] || { score: 0 };
+        return {
+          fillColor: getColor(info.score),
+          weight: 1.5,
+          opacity: 1,
+          color: '#ffffff',
+          dashArray: '2',
+          fillOpacity: 0.8
+        };
+      }
+
+      const info = L.control();
+
+      info.onAdd = function (map) {
+        this._div = L.DomUtil.create('div', 'info');
+        this.update();
+        return this._div;
+      };
+
+      info.update = function (props) {
+        if (props) {
+          const distName = (props.DISTRICT || props.district || '').toLowerCase();
+          const data = vulnerabilityData[distName];
+          this._div.innerHTML = `<h4>${props.DISTRICT || props.district}</h4>` +
+            (data
+              ? `<b>Vulnerability Index:</b> ${data.score}<br /><b>Risk Level:</b> ${data.category}`
+              : 'No data available');
+        } else {
+          this._div.innerHTML = 'Hover over a district';
+        }
+      };
+
+      info.addTo(map);
+
+      let geojsonLayer;
+
+      function highlightFeature(e) {
+        const layer = e.target;
+        layer.setStyle({
+          weight: 3,
+          color: '#333',
+          dashArray: '',
+          fillOpacity: 0.95
+        });
+        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+          layer.bringToFront();
+        }
+        info.update(layer.feature.properties);
+      }
+
+      function resetHighlight(e) {
+        geojsonLayer.resetStyle(e.target);
+        info.update();
+      }
+
+      function onEachFeature(feature, layer) {
+        layer.on({
+          mouseover: highlightFeature,
+          mouseout: resetHighlight
+        });
+      }
+
+      const geojsonUrl = 'https://raw.githubusercontent.com/geohacker/kerala/master/geojsons/district.geojson';
+
+      fetch(geojsonUrl)
+        .then(response => response.json())
+        .then(data => {
+          geojsonLayer = L.geoJson(data, {
+            style: style,
+            onEachFeature: onEachFeature
+          }).addTo(map);
+          map.fitBounds(geojsonLayer.getBounds());
+        })
+        .catch(err => console.error("Error loading GeoJSON:", err));
+
+      const legend = L.control({ position: 'bottomright' });
+
+      legend.onAdd = function (map) {
+        const div = L.DomUtil.create('div', 'info legend');
+        const grades = [0.20, 0.35, 0.45, 0.52, 0.60];
+
+        for (let i = 0; i < grades.length; i++) {
+          const from = grades[i];
+          const to = grades[i + 1];
+          div.innerHTML +=
+            '<i style="background:' + getColor(from + 0.01) + '"></i> ' +
+            from + (to ? '&ndash;' + to + '<br>' : '+');
+        }
+
+        return div;
+      };
+
+      legend.addTo(map);
+    })();
+  </script>
+</body>
+</html>
