@@ -35,4 +35,9 @@
   `;
 
   document.body.prepend(panel);
+
+  const watermark = document.createElement("div");
+  watermark.className = "kv-watermark";
+  watermark.setAttribute("aria-hidden", "true");
+  document.body.appendChild(watermark);
 })();

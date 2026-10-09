@@ -12,6 +12,7 @@
   --color-faint: #b9a173;
   --color-burgundy: #9c2b22;
   --color-gold: #b8872f;
+  --color-deep-green: #1f4d3a;
 
   --font-display: "Bebas Neue", sans-serif;
   --font-book: "EB Garamond", Garamond, Georgia, serif;
@@ -465,5 +466,28 @@ a {
 @media (max-width: 639px) {
   .kv-article {
     padding: 3rem 1.6rem;
+  }
+}
+
+/* Kasavu-inspired woven border watermark, pinned to the right edge of every
+   page. Faded so it reads as texture rather than competing with content. */
+.kv-watermark {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2cm;
+  background-image: url("assets/kasavu-pattern.svg");
+  background-repeat: repeat-y;
+  background-position: top right;
+  background-size: 52px 78px;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (max-width: 899px) {
+  .kv-watermark {
+    display: none;
   }
 }
