@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data — Project: Kerala Vision</title>
+  <meta name="description" content="A dashboard of available and missing public data across Kerala: industrial compliance, ecology, administration, and livelihoods.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css?v=3">
+
+  <style>
+    .kv-placeholder {
+      width: 100%;
+      padding: 4rem 3rem;
+    }
+
+    .kv-placeholder-inner {
+      max-width: 36rem;
+    }
+
+    .kv-eyebrow {
+      font-family: var(--font-spec);
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      margin: 0 0 1.25rem;
+    }
+
+    .kv-placeholder-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.75rem, 8vw, 5rem);
+      line-height: 0.95;
+      color: var(--color-burgundy);
+      margin: 0 0 1.5rem;
+    }
+
+    .kv-rule {
+      width: 4rem;
+      height: 2px;
+      background: var(--color-gold);
+      margin: 0 0 2rem;
+    }
+
+    @media (max-width: 639px) {
+      .kv-placeholder {
+        padding: 3rem 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body data-page="data">
+
+  <div id="kv-deck" class="kv-deck-top">
+    <section class="kv-placeholder">
+      <div class="kv-placeholder-inner">
+        <p class="kv-eyebrow">Project: Kerala Vision</p>
+        <h1 class="kv-placeholder-title">Data</h1>
+        <div class="kv-rule"></div>
+      </div>
+    </section>
+
+    <section class="kv-article">
+      <div class="kv-data-intro">
+        <p>A running map of what public data exists for Kerala, and what doesn&rsquo;t. Each table below tracks a theme we&rsquo;re investigating: the entity or indicator in question, how it&rsquo;s monitored, where the data (or report) lives, and what&rsquo;s still missing. Linked text points to the underlying source document or dataset.</p>
+      </div>
+
+      <div class="kv-data-wide">
+
+        <div class="kv-data-group">
+          <h2 class="kv-data-group-heading">Industrial Effluence &amp; Discharge Compliance</h2>
+          <div class="kv-data-table-wrap">
+            <table class="kv-data-table">
+              <thead>
+                <tr>
+                  <th>Industrial Entity</th>
+                  <th>Monitoring Status</th>
+                  <th>Compliance Parameter</th>
+                  <th>Discharge Site Compliance Data</th>
+                  <th>Orgs of interest</th>
+                  <th>Comments</th>
+                  <th>Relatable actors/models outside Kerala as reference for similar work</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="kv-data-entity">Eloor-Edayar Belt</td>
+                  <td>Periodic Monitoring</td>
+                  <td>Dissolved Oxygen (DO)</td>
+                  <td><a href="https://www.greentribunal.gov.in/sites/default/files/news_updates/OA%20287%20of%202024%20Report%20by%20R6.pdf" target="_blank" rel="noopener">Periyar River</a></td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-comment">Most of this data is with ULBs/Panchayats. The declarations are only periodically request by courts in cases, when a board/tribunal/committee releases data publicly. This requires a deeper investigation.</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">BPCL-KR</td>
+                  <td>OCEMS Integrated</td>
+                  <td>SO2, Water Intake</td>
+                  <td><a href="https://www.bharatpetroleum.in/pdf/compliance_report-3_irep.pdf" target="_blank" rel="noopener">Chitrapuzha River</a></td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">KMML (Kollam)</td>
+                  <td>Remedial Actions</td>
+                  <td>Heavy Metals, pH</td>
+                  <td><a href="https://www.greentribunal.gov.in/sites/default/files/news_updates/Compliance%20Report%20by%20State%20of%20Kerala%20in%20OA%20No.%20502%20of%202022%20(Padmakumar%20Vs.%20State%20of%20Kerala.pdf" target="_blank" rel="noopener">TS Canal / Sea</a></td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">Cochin Shipyard</td>
+                  <td>Six-Monthly Reports</td>
+                  <td>Marine Hydrodynamics</td>
+                  <td><a href="https://cochinshipyard.in/uploads/envirnmental/009cc8de5829ae7e789abb26a05a08ca.pdf" target="_blank" rel="noopener">Kochi Port</a></td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">Koratty river, NGI Ltd</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="kv-data-group">
+          <h2 class="kv-data-group-heading">Ecological Data</h2>
+          <div class="kv-data-table-wrap">
+            <table class="kv-data-table">
+              <thead>
+                <tr>
+                  <th>Ecological Header</th>
+                  <th>Monthly Satellite Capability</th>
+                  <th>Preferred Sensor / Dataset</th>
+                  <th>Availability Status</th>
+                  <th>Orgs of interest</th>
+                  <th>Comments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="kv-data-entity">Land Use Patterns</td>
+                  <td>High (5-day revisit)</td>
+                  <td>Sentinel-2 (Bands 2,3,4,8)</td>
+                  <td>Available via GEE 5</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-comment">All of these available at CoRE Stack/<a href="https://indiawris.gov.in/wris/" target="_blank" rel="noopener">Water data at India WRIS</a></td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">Hydrological Boundaries</td>
+                  <td>Indirect (Runoff modeling)</td>
+                  <td>Sentinel-1 (SAR) / CHIRPS</td>
+                  <td>Modeled (Boundaries are static)</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">Water Bodies Mapping</td>
+                  <td>High (Monthly Recurrence)</td>
+                  <td>JRC Global Surface Water</td>
+                  <td><a href="https://developers.google.com/earth-engine/datasets/tags/water" target="_blank" rel="noopener">Available (1984-Present)</a></td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">Groundwater Level</td>
+                  <td>Low (Coarse spatial resolution)</td>
+                  <td>NASA GRACE / GLDAS</td>
+                  <td><a href="https://developers.google.com/earth-engine/datasets/tags/water" target="_blank" rel="noopener">Available as Regional Anomaly</a></td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="kv-data-group">
+          <h2 class="kv-data-group-heading">Administrative and Economic Data Continuity</h2>
+          <div class="kv-data-table-wrap">
+            <table class="kv-data-table">
+              <thead>
+                <tr>
+                  <th>Header</th>
+                  <th>Monthly Availability</th>
+                  <th>10-Year Annual Count</th>
+                  <th>Data Source / Agency</th>
+                  <th>Orgs of interest</th>
+                  <th>Comments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="kv-data-entity">Ward Boundaries</td>
+                  <td>No</td>
+                  <td>Periodic (Census/Delim.)</td>
+                  <td><a href="https://wardmap.ksmart.live/" target="_blank" rel="noopener">Delimitation Commission / IKM</a></td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">Waste Management</td>
+                  <td>Partial (App-based)</td>
+                  <td>Yes (Aggregated)</td>
+                  <td><a href="https://suchitwamission.org/pdf/reports/9wQXnrK6tAuhZG7OBbGn.pdf" target="_blank" rel="noopener">Suchitwa Mission / LSGD</a></td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-comment">Latest report in Malayalam, report cited is from 2018-19</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">Renewable Energy</td>
+                  <td>Yes (Grid Stats)</td>
+                  <td>Yes</td>
+                  <td><a href="https://keralaenergy.gov.in/wp-content/uploads/2023/12/CSTEP_KL_Roadmap_2040_01Feb24-1-4.pdf" target="_blank" rel="noopener">KSEB / SLDC / ANERT 22</a></td>
+                  <td>1. CSTEP<br>2. Mudit&rsquo;s network</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">Legacy Remediation</td>
+                  <td>No</td>
+                  <td>No (Project-specific)</td>
+                  <td>Suchitwa Mission</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-comment">Scheme, but no data</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">Fleet Electrification</td>
+                  <td>Yes (Vahan)</td>
+                  <td>Yes (Last 5-7 years)</td>
+                  <td>Transport Dept / Vahan</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-comment">No fleet data, but total EVs, yes</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">GHG Emissions</td>
+                  <td>No</td>
+                  <td>Yes (2005-2018)</td>
+                  <td><a href="https://www.ghgplatform-india.org/wp-content/uploads/2022/09/GHGPI_Trend-Analysis_2005-to-2018_Kerala_Sep22.pdf" target="_blank" rel="noopener">GHG Platform India / Vasudha</a></td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-comment">Surprisingly little data - there will be more existing</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">Defunct Aquifers</td>
+                  <td>No</td>
+                  <td>Periodic (GEC)</td>
+                  <td><a href="https://www.greentribunal.gov.in/sites/default/files/news_updates/Report%20by%20Water%20Resources%20Department,%20State%20of%20Kerala%20in%20OA%20No.%20694%20of%202023%20%28News%20item%20aooearing%20in%20Hindustan%20Times%20dated%2026.10.2023%20titled%20UN%20predicts%20groundwater%20level%20...%29.pdf" target="_blank" rel="noopener">CGWB / SGWD</a></td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-comment">Green tribunal report touches but doesn&rsquo;t go deeper</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">Emission Credits</td>
+                  <td>No</td>
+                  <td>Yes (Registry based)</td>
+                  <td>ULBs</td>
+                  <td><a href="https://verra.org/" target="_blank" rel="noopener">Verra</a></td>
+                  <td class="kv-data-comment">ULBs will have this data. Though not sure how useful it is anymore.</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">ODS and HFC</td>
+                  <td>No</td>
+                  <td>Yes (National Proxy)</td>
+                  <td>MoEFCC Ozone Cell / MoSPI</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-comment">Data should exist somewhere in MoSPI since they aggregate this for India</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">Industrial Compliance</td>
+                  <td>Yes (OCEMS)</td>
+                  <td>Partial (Reports)</td>
+                  <td><a href="https://keralapcbonline.com/pcb/publicApplicationStatusDashBoard" target="_blank" rel="noopener">KSPCB / Phoenix Portal</a></td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-comment">Pheonix is very good, surprised to not have heard of it before</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="kv-data-group">
+          <h2 class="kv-data-group-heading">Livelihoods</h2>
+          <div class="kv-data-table-wrap">
+            <table class="kv-data-table">
+              <thead>
+                <tr>
+                  <th>Header</th>
+                  <th>Annual availability</th>
+                  <th>10-Year Annual Count</th>
+                  <th>Data Source / Agency</th>
+                  <th>Orgs of interest</th>
+                  <th>Comments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="kv-data-entity">HH Incomes</td>
+                  <td>Yes</td>
+                  <td>Yes</td>
+                  <td>NSSO</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-comment">Most of this data is easily available barring HH Savings</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">HH Consumption</td>
+                  <td>Yes</td>
+                  <td>Yes</td>
+                  <td>NSSO</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">HH Savings</td>
+                  <td>No</td>
+                  <td>No</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td><a href="https://www.dataforindia.com/" target="_blank" rel="noopener">Data For India</a></td>
+                  <td class="kv-data-empty">&mdash;</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">Unemployment</td>
+                  <td>Yes</td>
+                  <td>Yes</td>
+                  <td>PLFS</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">Occupations</td>
+                  <td>Yes</td>
+                  <td>Yes</td>
+                  <td>PLFS</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">Housing owned or rented</td>
+                  <td>Yes</td>
+                  <td>Yes</td>
+                  <td>NSSO</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                </tr>
+                <tr>
+                  <td class="kv-data-entity">HH health expenditure</td>
+                  <td>Yes</td>
+                  <td>Yes</td>
+                  <td><a href="http://data.gov.in/" target="_blank" rel="noopener">data.gov.in</a></td>
+                  <td class="kv-data-empty">&mdash;</td>
+                  <td class="kv-data-empty">&mdash;</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <script src="nav.js?v=3"></script>
+</body>
+</html>

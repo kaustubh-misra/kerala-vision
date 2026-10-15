@@ -11,6 +11,7 @@
     { href: "education.html", label: "Education", key: "education" },
     { href: "entrepreneurship.html", label: "Entrepreneurship", key: "entrepreneurship" },
     { href: "health.html", label: "Health", key: "health" },
+    { href: "data.html", label: "Data", key: "data" },
   ];
 
   const currentPage = document.body.dataset.page || "home";

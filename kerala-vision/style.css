@@ -469,6 +469,128 @@ a {
   }
 }
 
+/* Data page: tabular availability dashboard (IPUMS-style variable tables) */
+.kv-data-intro {
+  max-width: 44rem;
+  margin: 0 0 2.5rem;
+}
+
+.kv-data-wide {
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  .kv-data-wide {
+    width: calc(100vw - 16.5rem - 6rem);
+    max-width: calc(100vw - 16.5rem - 6rem);
+  }
+}
+
+.kv-data-group {
+  margin: 0 0 3rem;
+}
+
+.kv-data-group:last-child {
+  margin-bottom: 0;
+}
+
+.kv-data-group-heading {
+  font-family: var(--font-book);
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--color-burgundy);
+  margin: 0 0 1rem;
+  line-height: 1.3;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--color-gold);
+}
+
+.kv-data-table-wrap {
+  overflow-x: auto;
+  border: 1px solid rgba(58, 32, 22, 0.16);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.kv-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-book);
+  font-size: 16px;
+}
+
+.kv-data-table thead th {
+  position: sticky;
+  top: 0;
+  text-align: left;
+  vertical-align: bottom;
+  padding: 0.7rem 1rem;
+  background: var(--color-paper-deep);
+  color: var(--color-ink);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  border-bottom: 2px solid var(--color-gold);
+}
+
+.kv-data-table tbody td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid rgba(58, 32, 22, 0.1);
+  color: var(--color-ink);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.kv-data-table tbody tr:nth-child(even) {
+  background: rgba(184, 135, 47, 0.07);
+}
+
+.kv-data-table tbody tr:hover {
+  background: rgba(156, 43, 34, 0.08);
+}
+
+.kv-data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.kv-data-entity {
+  font-weight: 600;
+  color: var(--color-burgundy);
+}
+
+.kv-data-comment {
+  max-width: 22rem;
+  color: var(--color-ink-soft);
+  font-size: 15px;
+  font-style: italic;
+}
+
+.kv-data-table a {
+  color: var(--color-burgundy);
+  text-decoration: underline;
+  text-decoration-color: rgba(156, 43, 34, 0.4);
+  text-underline-offset: 2px;
+}
+
+.kv-data-table a:hover {
+  text-decoration-color: currentColor;
+}
+
+.kv-data-empty {
+  color: var(--color-faint);
+  text-align: center;
+}
+
+@media (max-width: 639px) {
+  .kv-data-table {
+    font-size: 15px;
+  }
+
+  .kv-data-comment {
+    max-width: 14rem;
+  }
+}
+
 /* Kasavu-inspired woven border watermark, pinned to the right edge of every
    page. Faded so it reads as texture rather than competing with content. */
 .kv-watermark {
