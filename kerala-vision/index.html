@@ -15,12 +15,52 @@
   <style>
     .kv-description {
       font-family: var(--font-book);
-      font-style: italic;
       font-size: 20px;
       line-height: 1.6;
       color: var(--color-ink-soft);
-      max-width: 36rem;
-      margin: 0 0 2.5rem;
+      max-width: 42rem;
+      margin: 0 0 1.4rem;
+    }
+
+    .kv-hero-row {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .kv-hero-row .kv-hero-inner {
+      flex: 1 1 28rem;
+    }
+
+    .kv-hero-figure {
+      flex: 0 0 auto;
+      max-width: 35rem;
+      margin-left: auto;
+    }
+
+    .kv-hero-figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid rgba(58, 32, 22, 0.14);
+      border-radius: 4px;
+      box-shadow: 0 6px 20px rgba(58, 32, 22, 0.2);
+    }
+
+    .kv-hero-caption {
+      font-family: var(--font-book);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--color-sepia);
+      margin: 0.65rem 0 0;
+      text-align: left;
+    }
+
+    @media (max-width: 899px) {
+      .kv-hero-figure {
+        margin: 2rem auto 0;
+      }
     }
   </style>
 </head>
@@ -28,11 +68,18 @@
 
   <div id="kv-deck">
     <section class="kv-hero">
-      <div class="kv-hero-inner">
-        <p class="kv-eyebrow">Kerala &middot; 2026 and beyond</p>
-        <h1 class="kv-title">Project:<span>Kerala Vision</span></h1>
-        <div class="kv-rule"></div>
-        <p class="kv-description">A climate-oriented, youth-centric, local-problem-solving vision for the state to transform into a hub of socially responsible sustainable development and innovation.</p>
+      <div class="kv-hero-row">
+        <div class="kv-hero-inner">
+          <p class="kv-eyebrow">Kerala &middot; 2026 and beyond</p>
+          <h1 class="kv-title">Project:<span>Kerala Vision</span></h1>
+          <div class="kv-rule"></div>
+          <p class="kv-description">Kerala faces a dual systemic challenge: escalating climate vulnerabilities colliding with acute youth brain drain. As global economic paradigms shift toward sustainability, impact finance, and green skills, traditional career and conventional tech-startup paths are facing rapid disruption. However, Kerala is uniquely equipped to navigate this transformation, underpinned by its strong educational foundation, exceptional human development markers, and active grassroots engines like the Startup Mission, Haritha Keralam, and Kudumbashree. By realigning these diverse institutional efforts into a broader, unified vision, the state can foster societal improvement while opening up vibrant entrepreneurial and economic frontiers for its youth.</p>
+          <p class="kv-description">Unlocking this opportunity requires reimagining entrepreneurship beyond software, mobilizing youth to develop practical solutions for urgent local challenges in waste management, agriculture, social empowerment &amp; ecological degradation. Offering energetic minds meaningful, problem-solving careers at home directly counters brain drain while establishing a globally relevant, climate-resilient development model. Rather than prescribing rigid top-down execution, this vision seeks to spark collective grassroots action by 2030. Anchored across five pillars&mdash;ecology, climate, skilling, education, and community&mdash;Kerala can transform its local crises into an engine for sustainable youth empowerment and economic renewal.</p>
+        </div>
+        <figure class="kv-hero-figure">
+          <img src="assets/tk-padmini-untitled.jpg" alt="Untitled painting by T.K. Padmini">
+          <figcaption class="kv-hero-caption">Untitled, T.K. Padmini, date unknown.</figcaption>
+        </figure>
       </div>
     </section>
   </div>
