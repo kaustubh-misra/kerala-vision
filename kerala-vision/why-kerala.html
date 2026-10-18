@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=5">
 
   <style>
     .kv-placeholder {
@@ -53,6 +53,27 @@
         <div class="kv-article-body">
           <p>Nestled between the vast Arabian Sea &amp; the mighty Western Ghats, the scent of Malabar has attracted traders, priests &amp; explorers to the resource-rich &amp; geographically-blessed land of Kerala for over two-and-a half millennia. Geographically insulated from the rest of the Indian peninsula, Kerala historically looked outward to the sea, cultivating deep international ties through trade and migration. This exposure fostered an open social environment, which over time, reform movements channeled into a strong culture of rights, civic engagement, and public education. Progressively, these social foundations matured into the &#x27;Kerala Model<sup class="kv-fnref"><a href="#fn1" id="fnref1">1</a></sup>&#x27;: a distinct set of policies and institutions that delivers exceptional human development indicators despite modest economic growth.</p>
 
+          <figure class="kv-chart kv-chart--wide">
+            <button type="button" class="kv-chart-download" data-chart="kv-where" aria-label="Download chart data as CSV" title="Download CSV"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></button>
+            <div class="kv-chart-header">
+              <h3>Kerala among the states and union territories</h3>
+              <p>Each row ranks every state/UT reporting a figure for that period, lowest on the left, highest on the right. Kerala is the highlighted dot; India&rsquo;s figure, where available, is the gold tick. Hover any point for its value.</p>
+            </div>
+            <div class="kv-where-chart-wrap">
+              <div class="kv-where-chart-scroll">
+                <svg class="kv-where-svg" id="kv-where-svg" viewBox="0 0 1184 846" role="img" aria-label="Dot plot comparing Kerala to other Indian states and union territories across eleven indicators"></svg>
+              </div>
+              <div class="kv-where-tooltip" id="kv-where-tooltip" role="tooltip" aria-hidden="true"></div>
+            </div>
+            <div class="kv-where-legend">
+              <span class="kv-where-legend-item"><span class="kv-where-legend-swatch" style="background: rgba(58, 32, 22, 0.28);"></span>State / UT</span>
+              <span class="kv-where-legend-item"><span class="kv-where-legend-swatch" style="background: var(--color-burgundy);"></span>Kerala</span>
+              <span class="kv-where-legend-item"><span class="kv-where-legend-swatch" style="background: var(--color-gold); border-radius: 2px; width: 3px;"></span>India</span>
+            </div>
+            <p class="kv-chart-caption kv-where-caption">Source: <a href="https://measure.thisindianlife.today/states/kerala/" target="_blank" rel="noopener">Measure of India</a>. Data compiled from RBI, MoSPI, PLFS, NFHS-5/6 &amp; State Finance Accounts.</p>
+            <p class="kv-chart-caption kv-where-caption">Ranks count only units with a figure for the same period.</p>
+          </figure>
+
           <p><strong>What are the issues?</strong></p>
 
           <p>But in the last two-and-a-half decades, the gains from this model seem to be dissipating, majorly due to rejection of the post-1991 reforms leveraged by neighbouring Andhra, Karnataka &amp; Tamil Nadu<sup class="kv-fnref"><a href="#fn2" id="fnref2">2</a></sup>: deregulated foreign direct investment to ignite a manufacturing and services boom, driving commercial technology adoption which increased labor productivity. Kerala charted its own path of a fast-growing remittance economy which kept consumption levels high<sup class="kv-fnref"><a href="#fn3" id="fnref3">3</a></sup>, which increased prices &amp; wages, unsubstantiated by local industrial productivity<sup class="kv-fnref"><a href="#fn4" id="fnref4">4</a></sup>. Supported by a large political economy &amp; labour movement, the increase in wages was sustained by the state by committing the majority of its revenues to recurring expenditure, such as salaries, pensions<sup class="kv-fnref"><a href="#fn5" id="fnref5">5</a></sup>, healthcare &amp; subsidies<sup class="kv-fnref"><a href="#fn6" id="fnref6">6</a></sup>.</p>
@@ -86,6 +107,232 @@
     </section>
   </div>
 
-  <script src="nav.js?v=3"></script>
+  <script src="nav.js?v=4"></script>
+  <script>
+    (function () {
+      // Data transcribed from Measure of India's "Where Kerala stands" dot-plot
+      // (measure.thisindianlife.today/states/kerala/#cb-where). Each row keeps its
+      // own min/max scale; "india" is the national figure where the source gives one.
+      const ROWS = [
+        {
+          label: 'Income per person', period: '2024-25', unit: 'rupee', india: null,
+          states: { 'Andaman and Nicobar': 288584, 'Andhra Pradesh': 266699, 'Arunachal Pradesh': 249075, 'Assam': 159185, 'Bihar': 69211, 'Chandigarh': 489173, 'Chhattisgarh': 162848, 'Delhi': 492592, 'Goa': 636703, 'Gujarat': 327195, 'Haryana': 353182, 'Himachal Pradesh': 258196, 'Jammu and Kashmir': 155398, 'Jharkhand': 116663, 'Karnataka': 386156, 'Madhya Pradesh': 154124, 'Maharashtra': 317801, 'Manipur': 138535, 'Meghalaya': 157141, 'Mizoram': 268145, 'Odisha': 171025, 'Puducherry': 281478, 'Punjab': 216592, 'Rajasthan': 185095, 'Sikkim': 646183, 'Tamil Nadu': 361619, 'Telangana': 380031, 'Tripura': 187049, 'Uttar Pradesh': 109844, 'Uttarakhand': 250736, 'West Bengal': 164141, 'Kerala': 308338 }
+        },
+        {
+          label: 'Real growth of GSDP', period: '2024-25', unit: 'percent', india: 6.5,
+          states: { 'Andaman and Nicobar': 4.5, 'Andhra Pradesh': 8.3, 'Arunachal Pradesh': 13.8, 'Assam': 7.8, 'Bihar': 8.4, 'Chandigarh': 6.1, 'Chhattisgarh': 6.4, 'Delhi': 6.2, 'Goa': 11.9, 'Gujarat': 7.4, 'Haryana': 7.5, 'Himachal Pradesh': 6.4, 'Jammu and Kashmir': 6.1, 'Jharkhand': 7.0, 'Karnataka': 7.3, 'Madhya Pradesh': 7.0, 'Maharashtra': 7.3, 'Manipur': 10.4, 'Meghalaya': 9.7, 'Mizoram': 11.3, 'Odisha': 7.2, 'Puducherry': 7.9, 'Punjab': 6.3, 'Rajasthan': 8.8, 'Sikkim': 6.3, 'Tamil Nadu': 11.2, 'Telangana': 6.5, 'Tripura': 9.0, 'Uttar Pradesh': 10.8, 'Uttarakhand': 6.4, 'West Bengal': 7.0, 'Kerala': 6.2 }
+        },
+        {
+          label: 'Retail inflation (CPI)', period: 'Aug 2026', unit: 'percent', india: 4.8,
+          states: { 'Andaman and Nicobar': 3.8, 'Andhra Pradesh': 5.5, 'Arunachal Pradesh': 3.1, 'Assam': 4.8, 'Bihar': 4.2, 'Chandigarh': 4.0, 'Chhattisgarh': 3.8, 'DNH and Daman and Diu': 6.2, 'Delhi': 2.6, 'Goa': 3.6, 'Gujarat': 5.0, 'Haryana': 3.9, 'Himachal Pradesh': 3.8, 'Jammu and Kashmir': 4.1, 'Jharkhand': 3.1, 'Karnataka': 5.2, 'Ladakh': 5.3, 'Lakshadweep': 3.1, 'Madhya Pradesh': 5.5, 'Maharashtra': 4.8, 'Manipur': 4.5, 'Meghalaya': 2.8, 'Mizoram': 2.4, 'Nagaland': 2.9, 'Odisha': 5.5, 'Puducherry': 5.8, 'Punjab': 4.5, 'Rajasthan': 5.2, 'Sikkim': 4.6, 'Tamil Nadu': 5.9, 'Telangana': 6.3, 'Tripura': 3.5, 'Uttar Pradesh': 5.1, 'Uttarakhand': 4.7, 'West Bengal': 3.3, 'Kerala': 4.7 }
+        },
+        {
+          label: 'Unemployment rate', period: '2025', unit: 'percent', india: 3.1,
+          states: { 'Andaman and Nicobar': 10.0, 'Andhra Pradesh': 4.2, 'Arunachal Pradesh': 6.6, 'Assam': 3.7, 'Bihar': 3.8, 'Chandigarh': 5.7, 'Chhattisgarh': 2.3, 'DNH and Daman and Diu': 1.6, 'Delhi': 5.9, 'Goa': 8.3, 'Gujarat': 0.9, 'Haryana': 4.5, 'Himachal Pradesh': 4.5, 'Jammu and Kashmir': 4.9, 'Jharkhand': 2.7, 'Karnataka': 2.3, 'Ladakh': 4.0, 'Lakshadweep': 6.9, 'Madhya Pradesh': 1.5, 'Maharashtra': 2.4, 'Manipur': 5.2, 'Meghalaya': 4.8, 'Mizoram': 2.4, 'Nagaland': 6.7, 'Odisha': 2.9, 'Puducherry': 5.4, 'Punjab': 5.3, 'Rajasthan': 4.3, 'Sikkim': 3.2, 'Tamil Nadu': 3.4, 'Telangana': 5.0, 'Tripura': 2.7, 'Uttar Pradesh': 2.7, 'Uttarakhand': 5.1, 'West Bengal': 2.8, 'Kerala': 4.4 }
+        },
+        {
+          label: 'Women in the labour force', period: '2025', unit: 'percent', india: 40.0,
+          states: { 'Andaman and Nicobar': 50.3, 'Andhra Pradesh': 44.8, 'Arunachal Pradesh': 61.7, 'Assam': 42.8, 'Bihar': 24.7, 'Chandigarh': 35.6, 'Chhattisgarh': 59.8, 'DNH and Daman and Diu': 38.3, 'Delhi': 13.1, 'Goa': 27.4, 'Gujarat': 46.2, 'Haryana': 23.8, 'Himachal Pradesh': 64.7, 'Jammu and Kashmir': 53.1, 'Jharkhand': 43.7, 'Karnataka': 39.8, 'Ladakh': 61.0, 'Lakshadweep': 21.9, 'Madhya Pradesh': 46.1, 'Maharashtra': 39.9, 'Manipur': 52.6, 'Meghalaya': 64.3, 'Mizoram': 38.0, 'Nagaland': 64.5, 'Odisha': 47.3, 'Puducherry': 32.7, 'Punjab': 30.2, 'Rajasthan': 52.3, 'Sikkim': 66.7, 'Tamil Nadu': 47.3, 'Telangana': 46.4, 'Tripura': 46.3, 'Uttar Pradesh': 32.4, 'Uttarakhand': 37.8, 'West Bengal': 37.5, 'Kerala': 41.2 }
+        },
+        {
+          label: 'Monthly spending per person, rural', period: '2023-24', unit: 'rupee', india: 4122,
+          states: { 'Andaman and Nicobar': 7771, 'Andhra Pradesh': 5327, 'Arunachal Pradesh': 5995, 'Assam': 3793, 'Bihar': 3670, 'Chandigarh': 8857, 'Chhattisgarh': 2739, 'DNH and Daman and Diu': 4311, 'Delhi': 7400, 'Goa': 8048, 'Gujarat': 4116, 'Haryana': 5377, 'Himachal Pradesh': 5825, 'Jammu and Kashmir': 4774, 'Jharkhand': 2946, 'Karnataka': 4903, 'Ladakh': 5010, 'Lakshadweep': 6350, 'Madhya Pradesh': 3441, 'Maharashtra': 4145, 'Manipur': 4531, 'Meghalaya': 3852, 'Mizoram': 5963, 'Nagaland': 5155, 'Odisha': 3357, 'Puducherry': 7598, 'Punjab': 5817, 'Rajasthan': 4510, 'Sikkim': 9377, 'Tamil Nadu': 5701, 'Telangana': 5435, 'Tripura': 6259, 'Uttar Pradesh': 3481, 'Uttarakhand': 5003, 'West Bengal': 3620, 'Kerala': 6611 }
+        },
+        {
+          label: 'Improved toilet at home', period: 'NFHS-5, 2019-21', unit: 'percent', india: 70.2,
+          states: { 'Andaman and Nicobar': 88.0, 'Andhra Pradesh': 77.3, 'Arunachal Pradesh': 82.9, 'Assam': 68.5, 'Bihar': 49.4, 'Chandigarh': 85.0, 'Chhattisgarh': 76.8, 'DNH and Daman and Diu': 65.8, 'Delhi': 81.1, 'Goa': 87.9, 'Gujarat': 74.0, 'Haryana': 85.0, 'Himachal Pradesh': 81.8, 'Jammu and Kashmir': 75.7, 'Jharkhand': 56.6, 'Karnataka': 74.8, 'Ladakh': 42.3, 'Lakshadweep': 99.8, 'Madhya Pradesh': 65.1, 'Maharashtra': 72.0, 'Manipur': 64.8, 'Meghalaya': 82.9, 'Mizoram': 95.3, 'Nagaland': 87.7, 'Odisha': 60.5, 'Puducherry': 84.9, 'Punjab': 86.6, 'Rajasthan': 71.1, 'Sikkim': 87.3, 'Tamil Nadu': 72.6, 'Telangana': 76.2, 'Tripura': 73.6, 'Uttar Pradesh': 68.8, 'Uttarakhand': 78.8, 'West Bengal': 68.0, 'Kerala': 98.7 }
+        },
+        {
+          label: 'Children stunted', period: 'NFHS-6, 2023-24', unit: 'percent', india: 29.3,
+          states: { 'Andaman and Nicobar': 26.7, 'Andhra Pradesh': 24.6, 'Arunachal Pradesh': 24.1, 'Assam': 30.3, 'Bihar': 35.6, 'Chandigarh': 19.0, 'Chhattisgarh': 27.5, 'DNH and Daman and Diu': 37.1, 'Delhi': 26.4, 'Goa': 19.4, 'Gujarat': 35.3, 'Haryana': 25.9, 'Himachal Pradesh': 20.6, 'Jammu and Kashmir': 21.4, 'Jharkhand': 35.0, 'Karnataka': 26.5, 'Ladakh': 26.0, 'Lakshadweep': 34.1, 'Madhya Pradesh': 31.4, 'Maharashtra': 29.5, 'Meghalaya': 36.8, 'Mizoram': 26.1, 'Nagaland': 25.1, 'Odisha': 26.8, 'Puducherry': 16.6, 'Punjab': 20.4, 'Rajasthan': 29.6, 'Sikkim': 20.1, 'Tamil Nadu': 20.7, 'Telangana': 27.0, 'Tripura': 21.9, 'Uttar Pradesh': 31.5, 'Uttarakhand': 20.0, 'West Bengal': 22.4, 'Kerala': 20.1 }
+        },
+        {
+          label: 'Credit-deposit ratio', period: 'end Jun 2026', unit: 'percent', india: 83.0,
+          states: { 'Andaman and Nicobar': 54.4, 'Andhra Pradesh': 160.7, 'Arunachal Pradesh': 38.5, 'Assam': 69.6, 'Bihar': 54.4, 'Chandigarh': 86.8, 'Chhattisgarh': 88.6, 'DNH and Daman and Diu': 52.3, 'Delhi': 91.5, 'Goa': 29.9, 'Gujarat': 95.0, 'Haryana': 75.9, 'Himachal Pradesh': 40.3, 'Jammu and Kashmir': 58.5, 'Jharkhand': 43.6, 'Karnataka': 71.3, 'Ladakh': 45.0, 'Lakshadweep': 13.0, 'Madhya Pradesh': 82.2, 'Maharashtra': 90.2, 'Manipur': 91.3, 'Meghalaya': 45.5, 'Mizoram': 44.3, 'Nagaland': 63.3, 'Odisha': 51.5, 'Puducherry': 81.7, 'Punjab': 61.9, 'Rajasthan': 98.9, 'Sikkim': 48.4, 'Tamil Nadu': 126.8, 'Telangana': 115.4, 'Tripura': 48.2, 'Uttar Pradesh': 54.3, 'Uttarakhand': 45.0, 'West Bengal': 58.6, 'Kerala': 70.2 }
+        },
+        {
+          label: 'Electricity available per person', period: '2024-25', unit: 'kwh', india: 1208,
+          states: { 'Andaman and Nicobar': 1015, 'Andhra Pradesh': 1482, 'Arunachal Pradesh': 666, 'Assam': 356, 'Bihar': 344, 'Chandigarh': 1569, 'Chhattisgarh': 1415, 'Delhi': 1758, 'Goa': 3418, 'Gujarat': 2099, 'Haryana': 2294, 'Himachal Pradesh': 1803, 'Jammu and Kashmir': 1480, 'Jharkhand': 379, 'Karnataka': 1357, 'Lakshadweep': 1015, 'Madhya Pradesh': 1191, 'Maharashtra': 1584, 'Manipur': 329, 'Meghalaya': 607, 'Mizoram': 568, 'Nagaland': 417, 'Odisha': 920, 'Puducherry': 2109, 'Punjab': 2503, 'Rajasthan': 1386, 'Sikkim': 820, 'Tamil Nadu': 1692, 'Telangana': 2306, 'Tripura': 464, 'Uttar Pradesh': 692, 'Uttarakhand': 1423, 'West Bengal': 714, 'Kerala': 880 }
+        },
+        {
+          label: 'College enrolment ratio', period: '2021-22', unit: 'percent', india: 28.4,
+          states: { 'Andaman and Nicobar': 22.6, 'Andhra Pradesh': 36.5, 'Arunachal Pradesh': 36.5, 'Assam': 16.9, 'Bihar': 17.1, 'Chandigarh': 64.8, 'Chhattisgarh': 19.6, 'DNH and Daman and Diu': 11.2, 'Delhi': 49.0, 'Goa': 35.8, 'Gujarat': 24.0, 'Haryana': 33.3, 'Himachal Pradesh': 43.1, 'Jammu and Kashmir': 24.8, 'Jharkhand': 18.6, 'Karnataka': 36.2, 'Ladakh': 11.5, 'Lakshadweep': 1.1, 'Madhya Pradesh': 28.9, 'Maharashtra': 35.3, 'Manipur': 35.4, 'Meghalaya': 25.4, 'Mizoram': 32.3, 'Nagaland': 18.8, 'Odisha': 22.1, 'Puducherry': 61.5, 'Punjab': 27.4, 'Rajasthan': 28.6, 'Sikkim': 38.6, 'Tamil Nadu': 47.0, 'Telangana': 40.0, 'Tripura': 20.7, 'Uttar Pradesh': 24.1, 'Uttarakhand': 41.8, 'West Bengal': 26.3, 'Kerala': 41.3 }
+        }
+      ];
+
+      const SVG_NS = 'http://www.w3.org/2000/svg';
+      const AXIS_X1 = 288;
+      const AXIS_X2 = 1174;
+      const LABEL_X = 270;
+      const TOP_OFFSET = 34;
+      const ROW_HEIGHT = 72;
+      const LABEL1_OFFSET = 5;
+      const LABEL2_OFFSET = 21;
+      const AXIS_OFFSET = 8.5;
+      const DOTS_OFFSET = 8;
+      const MINMAX_OFFSET = 29;
+
+      function formatValue(unit, v) {
+        if (unit === 'rupee') return '₹' + v.toLocaleString('en-IN');
+        if (unit === 'kwh') return v.toLocaleString('en-IN') + ' kWh';
+        return v.toFixed(1) + '%';
+      }
+
+      function el(tag, attrs) {
+        const node = document.createElementNS(SVG_NS, tag);
+        for (const key in attrs) node.setAttribute(key, attrs[key]);
+        return node;
+      }
+
+      function scaleX(v, min, max) {
+        if (max === min) return (AXIS_X1 + AXIS_X2) / 2;
+        return AXIS_X1 + ((v - min) / (max - min)) * (AXIS_X2 - AXIS_X1);
+      }
+
+      const svg = document.getElementById('kv-where-svg');
+      const tooltip = document.getElementById('kv-where-tooltip');
+      const wrap = tooltip.parentElement;
+
+      let activeEl = null;
+
+      function setActive(node) {
+        if (activeEl === node) return;
+        if (activeEl) activeEl.classList.remove('is-active');
+        if (node) node.classList.add('is-active');
+        activeEl = node;
+      }
+
+      function showTooltipAt(clientX, clientY, text) {
+        const wrapRect = wrap.getBoundingClientRect();
+        tooltip.textContent = text;
+        tooltip.style.left = (clientX - wrapRect.left) + 'px';
+        tooltip.style.top = (clientY - wrapRect.top - 14) + 'px';
+        tooltip.classList.add('is-visible');
+      }
+
+      function hideTooltip() {
+        tooltip.classList.remove('is-visible');
+        setActive(null);
+      }
+
+      // Tapping anywhere outside the chart (touch devices) dismisses the tooltip.
+      document.addEventListener('touchstart', (e) => {
+        if (!e.target.closest('.kv-where-hit')) hideTooltip();
+      }, { passive: true });
+
+      const csvRows = [];
+
+      ROWS.forEach((row, i) => {
+        const rowTop = TOP_OFFSET + i * ROW_HEIGHT;
+        const axisY = rowTop + AXIS_OFFSET;
+        const dotsY = rowTop + DOTS_OFFSET;
+
+        const values = Object.values(row.states);
+        const min = Math.min.apply(null, values);
+        const max = Math.max.apply(null, values);
+
+        let minState = null, maxState = null;
+        Object.entries(row.states).forEach(([name, v]) => {
+          if (minState === null || v < row.states[minState]) minState = name;
+          if (maxState === null || v > row.states[maxState]) maxState = name;
+        });
+
+        svg.appendChild(el('text', { x: LABEL_X, y: rowTop + LABEL1_OFFSET, 'font-size': 12.5, 'text-anchor': 'end', 'font-weight': 500, fill: '#3a2016' })).textContent = row.label;
+        svg.appendChild(el('text', { x: LABEL_X, y: rowTop + LABEL2_OFFSET, 'font-size': 11.5, 'text-anchor': 'end', fill: '#8a6a3f' })).textContent = row.period;
+
+        svg.appendChild(el('line', { x1: AXIS_X1, x2: AXIS_X2, y1: axisY, y2: axisY, stroke: 'rgba(58,32,22,0.15)', 'stroke-width': 1 }));
+
+        // Points for this row, tracked for hit-testing (nearest-point hover) and CSV export.
+        const points = [];
+
+        Object.entries(row.states).forEach(([name, v]) => {
+          if (name === 'Kerala') return;
+          const x = scaleX(v, min, max);
+          const dot = el('circle', { class: 'kv-where-dot', cx: x.toFixed(1), cy: dotsY, r: 3.5, fill: 'rgba(58,32,22,0.28)' });
+          svg.appendChild(dot);
+          points.push({ x, el: dot, text: name + ': ' + formatValue(row.unit, v) });
+          csvRows.push([row.label, row.period, name, v]);
+        });
+
+        if (row.india !== null) {
+          const indiaX = scaleX(row.india, min, max);
+          const tick = el('line', {
+            class: 'kv-where-india-tick',
+            x1: indiaX.toFixed(1), x2: indiaX.toFixed(1),
+            y1: dotsY - 7, y2: dotsY + 7, stroke: '#b8872f', 'stroke-width': 2.5
+          });
+          svg.appendChild(tick);
+          points.push({ x: indiaX, el: tick, text: 'India: ' + formatValue(row.unit, row.india) });
+          csvRows.push([row.label, row.period, 'India', row.india]);
+        }
+
+        const keralaV = row.states['Kerala'];
+        const keralaX = scaleX(keralaV, min, max);
+        svg.appendChild(el('text', { x: keralaX.toFixed(1), y: dotsY - 12, 'font-size': 12.5, 'text-anchor': 'middle', 'font-weight': 600, fill: '#15171A' })).textContent = formatValue(row.unit, keralaV);
+        const keralaDot = el('circle', { class: 'kv-where-kerala-dot', cx: keralaX.toFixed(1), cy: dotsY, r: 6, fill: '#9c2b22', stroke: '#fff', 'stroke-width': 1.5 });
+        svg.appendChild(keralaDot);
+        points.push({ x: keralaX, el: keralaDot, text: 'Kerala: ' + formatValue(row.unit, keralaV) });
+        csvRows.push([row.label, row.period, 'Kerala', keralaV]);
+
+        svg.appendChild(el('text', { x: AXIS_X1, y: rowTop + MINMAX_OFFSET, 'font-size': 11.5, fill: '#6B7078' })).textContent = minState + ' ' + formatValue(row.unit, row.states[minState]);
+        svg.appendChild(el('text', { x: AXIS_X2, y: rowTop + MINMAX_OFFSET, 'font-size': 11.5, 'text-anchor': 'end', fill: '#6B7078' })).textContent = maxState + ' ' + formatValue(row.unit, row.states[maxState]);
+
+        // Invisible hit band spanning the full row: lets the tooltip track the cursor
+        // continuously and snap to the nearest point, rather than requiring a pixel-precise
+        // hover over a 3.5px dot.
+        const hit = el('rect', { class: 'kv-where-hit', x: AXIS_X1, y: rowTop, width: AXIS_X2 - AXIS_X1, height: ROW_HEIGHT, fill: 'transparent' });
+        svg.appendChild(hit);
+
+        function handlePointer(clientX, clientY) {
+          const svgRect = svg.getBoundingClientRect();
+          const scale = svgRect.width / 1184;
+          const localX = (clientX - svgRect.left) / scale;
+          let nearest = points[0];
+          let bestDist = Infinity;
+          points.forEach((p) => {
+            const d = Math.abs(p.x - localX);
+            if (d < bestDist) { bestDist = d; nearest = p; }
+          });
+          showTooltipAt(clientX, clientY, nearest.text);
+          setActive(nearest.el);
+        }
+
+        hit.addEventListener('mousemove', (e) => handlePointer(e.clientX, e.clientY));
+        hit.addEventListener('mouseleave', hideTooltip);
+        hit.addEventListener('touchstart', (e) => {
+          const t = e.touches[0];
+          if (t) handlePointer(t.clientX, t.clientY);
+        }, { passive: true });
+        hit.addEventListener('touchmove', (e) => {
+          const t = e.touches[0];
+          if (t) { handlePointer(t.clientX, t.clientY); e.preventDefault(); }
+        }, { passive: false });
+      });
+
+      // --- CSV export (shared pattern with other charts on this site) ---
+      function toCSV(headers, rows) {
+        const esc = (v) => {
+          const s = String(v);
+          return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+        };
+        return [headers, ...rows].map((r) => r.map(esc).join(',')).join('\n');
+      }
+
+      const downloadBtn = document.querySelector('.kv-chart-download[data-chart="kv-where"]');
+      if (downloadBtn) {
+        downloadBtn.addEventListener('click', () => {
+          const blob = new Blob([toCSV(['Indicator', 'Period', 'State/UT', 'Value'], csvRows)], { type: 'text/csv;charset=utf-8;' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'kerala-where-it-stands.csv';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

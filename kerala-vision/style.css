@@ -311,13 +311,18 @@ a {
   }
 }
 
-.kv-chart-caption {
+p.kv-chart-caption {
   font-family: var(--font-book);
   font-size: 14px;
   font-style: italic;
   color: var(--color-sepia);
   text-align: center;
   margin: 0.75rem 0 0;
+}
+
+.kv-chart-caption a {
+  color: var(--color-burgundy);
+  text-decoration: underline;
 }
 
 .kv-chart-header {
@@ -364,6 +369,104 @@ a {
   width: 13px;
   height: 13px;
   border-radius: 3px;
+  margin-right: 6px;
+}
+
+/* "Where Kerala stands" interactive dot-plot chart (Why Kerala page) */
+.kv-where-chart-wrap {
+  position: relative;
+}
+
+.kv-where-chart-scroll {
+  overflow-x: auto;
+}
+
+.kv-where-svg {
+  display: block;
+  width: 100%;
+  min-width: 760px;
+  height: auto;
+}
+
+.kv-where-dot {
+  transition: r 0.1s ease;
+}
+
+.kv-where-dot.is-active {
+  r: 5.5;
+  fill: rgba(58, 32, 22, 0.55);
+}
+
+.kv-where-kerala-dot {
+  transition: r 0.1s ease;
+}
+
+.kv-where-kerala-dot.is-active {
+  r: 7.5;
+}
+
+.kv-where-india-tick {
+  transition: stroke-width 0.1s ease;
+}
+
+.kv-where-india-tick.is-active {
+  stroke-width: 4;
+}
+
+.kv-where-hit {
+  cursor: crosshair;
+}
+
+.kv-chart-caption.kv-where-caption {
+  text-align: left;
+  font-size: 14px;
+}
+
+.kv-where-tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: rgba(58, 32, 22, 0.95);
+  color: #fdf6e8;
+  font-family: var(--font-book);
+  font-size: 13px;
+  line-height: 1.4;
+  padding: 0.35rem 0.65rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, -100%);
+  transition: opacity 0.12s ease;
+}
+
+.kv-where-tooltip.is-visible {
+  opacity: 1;
+}
+
+.kv-where-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  margin: 1rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(58, 32, 22, 0.15);
+}
+
+.kv-where-legend-item {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-book);
+  font-size: 13px;
+  color: var(--color-ink-soft);
+}
+
+.kv-where-legend-swatch {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
   margin-right: 6px;
 }
 
