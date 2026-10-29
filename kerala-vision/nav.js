@@ -12,7 +12,7 @@
     { href: "entrepreneurship.html", label: "Entrepreneurship", key: "entrepreneurship" },
     { href: "health.html", label: "Health", key: "health" },
     { href: "data.html", label: "Data", key: "data" },
-    { href: "https://kaustubh-misra.github.io/kerala-flfpr/", label: "Where are Kerala’s working women?", key: "flfpr" },
+    { href: "https://kaustubh-misra.github.io/kerala-flfpr/", label: "Women &amp; Work", key: "flfpr" },
   ];
 
   const currentPage = document.body.dataset.page || "home";
